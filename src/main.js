@@ -6,9 +6,8 @@ import App from './App'
 import router from './router'
 import BootstrapVue from 'bootstrap-vue'
 
-// Styles
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
+// Styles (own + libs)
+import './assets/scss/main.scss'
 
 Vue.use(BootstrapVue)
 
