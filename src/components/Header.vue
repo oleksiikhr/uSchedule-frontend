@@ -141,10 +141,6 @@ export default {
   margin-left: 20px;
 }
 
-.h-btn, .h-btn-icon {
-  color: rgba(255, 255, 255, .85);
-}
-
 .h-btn {
   display: flex;
   align-items: center;
@@ -154,6 +150,7 @@ export default {
   background: none;
   border: 1px solid #e0e0e0;
   border-radius: 0;
+  color: #fff;
   text-decoration: none;
   transition: .3s;
   &:hover {
@@ -173,6 +170,7 @@ export default {
   width: 40px;
   cursor: pointer;
   text-decoration: none;
+  color: rgba(255, 255, 255, .85);
   outline: 0;
   margin: 0 3px;
   transition: .3s;

@@ -22,6 +22,9 @@ export default {
     darkTheme () {
       return this.$store.state.template.darkTheme
     }
+  },
+  created () {
+    this.$store.commit('GET_DARK_THEME')
   }
 }
 </script>
