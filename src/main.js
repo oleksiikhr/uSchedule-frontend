@@ -4,12 +4,12 @@ import App from './App'
 // import axios from 'axios'
 // import moment from 'moment'
 import router from './router'
-import BootstrapVue from 'bootstrap-vue'
+import ElementUI from 'element-ui'
 
 // Styles (own + libs)
 import './assets/scss/main.scss'
 
-Vue.use(BootstrapVue)
+Vue.use(ElementUI)
 
 // moment.locale()
 
