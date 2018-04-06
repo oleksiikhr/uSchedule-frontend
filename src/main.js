@@ -4,6 +4,7 @@ import App from './App'
 // import axios from 'axios'
 // import moment from 'moment'
 import router from './router'
+import store from './store/index'
 import ElementUI from 'element-ui'
 
 // Styles (own + libs)
@@ -19,6 +20,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })

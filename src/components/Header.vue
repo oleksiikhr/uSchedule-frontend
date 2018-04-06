@@ -1,5 +1,5 @@
 <template>
-  <div class="toolbar">
+  <div :class="'toolbar' + (darkTheme ? ' black' : '')">
     <router-link to="/" class="logo">
       <!-- TODO LOGO (img, svg) -->
       <!-- TODO Animate* on hover -->
@@ -9,30 +9,30 @@
     <div :class="classSearch">
       <div class="input-group primary--text">
         <i class="material-icons">search</i>
-        <input @focus="search.focused = true" @blur="search.focused = false" />
+        <input @focus="search.focused = true" @blur="search.focused = false">
         <!-- TODO Clear input X -->
       </div>
     </div>
 
     <div class="right">
-      <button class="h-btn-icon">
-        <i class="material-icons">lightbulb_outline</i>
+      <button @click="changeDarkTheme()" class="h-btn-icon">
+        <i class="material-icons">opacity</i>
       </button>
       <!-- TODO FIXME if auth (Notifications) -->
-      <button class="h-btn-icon">
+      <router-link to="/notifications" class="h-btn-icon">
         <i class="material-icons">notifications_none</i>
-      </button>
+      </router-link>
       <!-- TODO FIXME if auth && admin (Admin page) -->
-      <button class="h-btn-icon">
-        <i class="material-icons">settings</i>
-      </button>
+      <router-link to="/admin" class="h-btn-icon">
+        <i class="material-icons">star_border</i>
+      </router-link>
       <!-- TODO FIXME if auth (User panel) -->
       <!-- TODO Component -->
 
       <!-- TODO FIXME if not auth -->
-      <el-button class="h-btn">
+      <router-link to="/login" class="h-btn">
         Авторизация
-      </el-button>
+      </router-link>
 
       <!-- TODO If auth - Admin panel (icon) -->
       <!-- TODO If auth - User panel -->
@@ -53,6 +53,14 @@ export default {
   computed: {
     classSearch () {
       return 'search' + (this.search.focused ? ' is--focused' : '')
+    },
+    darkTheme () {
+      return this.$store.state.template.darkTheme
+    }
+  },
+  methods: {
+    changeDarkTheme () {
+      this.$store.commit('CHANGE_DARK_THEME')
     }
   }
 }
@@ -75,6 +83,9 @@ export default {
   color: #fff;
   text-decoration: none !important;
   padding-right: 60px;
+  &:hover {
+    color: #fff;
+  }
 }
 
 .search {
@@ -130,12 +141,20 @@ export default {
   margin-left: 20px;
 }
 
+.h-btn, .h-btn-icon {
+  color: rgba(255, 255, 255, .85);
+}
+
 .h-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
   margin-left: 10px;
   background: none;
-  border: 1px solid #fff;
+  border: 1px solid #e0e0e0;
   border-radius: 0;
-  color: #fff;
+  text-decoration: none;
   transition: .3s;
   &:hover {
     background: #fff;
@@ -144,20 +163,60 @@ export default {
 }
 
 .h-btn-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 0;
   border: 0;
   background: 0;
   height: 40px;
   width: 40px;
   cursor: pointer;
-  color: #fff;
+  text-decoration: none;
   outline: 0;
   margin: 0 3px;
   transition: .3s;
   line-height: 0;
   &:hover {
-    background: #fff;
-    color: #0288d1;
+    color: #fff;
+  }
+}
+
+// Dark
+
+.dark {
+  .search {
+    &.is--focused i {
+      color: rgba(255, 255, 255, .9) !important;
+    }
+    .input-group {
+      color: rgba(255, 255, 255, .85);
+      background: #4a4a4a;
+      i {
+        color: rgba(255, 255, 255, .5);
+      }
+      input {
+        color: rgba(255, 255, 255, .85);
+        background: #4a4a4a;
+      }
+    }
+  }
+  .right {
+    a, button {
+      color: rgba(255, 255, 255, .5);
+    }
+    .h-btn {
+      color: rgba(255, 255, 255, .85);
+      border-color: #7d7d7d;
+      &:hover {
+        background: #222;
+      }
+    }
+    .h-btn-icon, .h-btn {
+      &:hover {
+        color: rgba(255, 255, 255, .9);
+      }
+    }
   }
 }
 </style>
