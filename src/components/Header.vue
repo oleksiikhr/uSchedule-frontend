@@ -9,7 +9,7 @@
     <div :class="classSearch">
       <div class="input-group primary--text">
         <i class="material-icons">search</i>
-        <input @focus="search.focused = true" @blur="search.focused = false">
+        <input placeholder="Поиск" @focus="search.focused = true" @blur="search.focused = false">
         <!-- TODO Clear input X -->
       </div>
     </div>
@@ -147,15 +147,13 @@ export default {
   justify-content: center;
   padding: 0 15px;
   margin-left: 10px;
-  background: none;
-  border: 1px solid #e0e0e0;
-  border-radius: 0;
+  background: #006da9;
   color: #fff;
   text-decoration: none;
   transition: .3s;
   &:hover {
     background: #fff;
-    color: #0288d1;
+    color: #333;
   }
 }
 
@@ -205,7 +203,7 @@ export default {
     }
     .h-btn {
       color: rgba(255, 255, 255, .85);
-      border-color: #7d7d7d;
+      background: #525252;
       &:hover {
         background: #222;
       }
