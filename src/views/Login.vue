@@ -8,7 +8,7 @@
       <div class="content">
         <h1>Авторизация</h1>
         <small>Забыли пароль? <router-link to="/restore">Восстановить аккаунт.</router-link></small>
-        <el-form label-position="top" :model="form">
+        <el-form label-position="top" :model="form" :class="theme">
           <el-form-item label="Логин">
             <el-input v-model="form.login" ref="login" />
           </el-form-item>
@@ -88,6 +88,8 @@ a {
   min-height: 400px;
   background: url('../assets/images/login/background.jpg') center;
   background-size: contain;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
   &::after {
     content: '';
     position: absolute;
@@ -95,7 +97,9 @@ a {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(26, 45, 80, 0.68);
+    background: rgba(14, 27, 49, 0.7);
+    border-top-left-radius: 10px;
+    border-bottom-left-radius: 10px;
   }
   > img {
     z-index: 999;
@@ -134,5 +138,29 @@ a {
 
 .bottom10 {
   margin-bottom: 10px;
+}
+
+// Dark
+
+.dark {
+  .left::after {
+    background: rgba(21, 21, 21, 0.9);
+  }
+  .right {
+    background: #333;
+    border-color: #333;
+    h1 {
+      color: #fff;
+    }
+    small {
+      color: rgba(255, 255, 255, .85);
+      > a {
+        color: #c59090;
+      }
+    }
+    label {
+      color: rgba(255, 255, 255, .85);
+    }
+  }
 }
 </style>
