@@ -6,11 +6,12 @@ import App from './App'
 import router from './router'
 import store from './store/index'
 import ElementUI from 'element-ui'
+import lang from 'element-ui/lib/locale/lang/ru-RU'
 
 // Styles (own + libs)
 import './assets/scss/main.scss'
 
-Vue.use(ElementUI)
+Vue.use(ElementUI, lang)
 
 // moment.locale()
 

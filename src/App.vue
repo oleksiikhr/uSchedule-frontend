@@ -32,6 +32,7 @@ export default {
 <style lang="scss" scoped>
 #app {
   min-height: 100vh;
+  background: #fbfbfb;
 }
 
 header {

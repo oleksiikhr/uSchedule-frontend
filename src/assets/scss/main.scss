@@ -18,10 +18,25 @@ body {
   padding: 0;
 }
 
+a {
+  text-decoration: none;
+  color: #23a8f1;
+}
+
 .primary {
   background: $main-color;
 }
 
 .primary--text {
   color: $main-color;
+}
+
+.text--right {
+  text-align: right;
+}
+
+.el-form--label-top {
+  .el-form-item__label {
+    line-height: normal;
+  }
 }
