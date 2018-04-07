@@ -1,23 +1,54 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
+  <div id="app" :class="theme">
+    <el-container>
+      <el-header class="primary">
+        <header-content />
+      </el-header>
+      <el-main>
+        <router-view />
+      </el-main>
+    </el-container>
   </div>
 </template>
 
 <script>
+import HeaderContent from './components/Header'
+
 export default {
-  name: 'App'
+  components: {
+    HeaderContent
+  },
+  computed: {
+    theme () {
+      return this.$store.state.template.theme
+    }
+  },
+  created () {
+    this.$store.commit('GET_DARK_THEME')
+  }
 }
 </script>
 
-<style>
+<style lang="scss" scoped>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  min-height: 100vh;
+  background: #fbfbfb;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  height: 64px !important;
+  box-shadow: 0 0 1px 0 #4c4c4c;
+}
+
+// Dark Theme
+.dark {
+  &#app {
+    background: #222;
+  }
+  header {
+    background: #333;
+  }
 }
 </style>
