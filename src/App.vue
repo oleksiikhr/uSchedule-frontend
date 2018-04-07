@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="darkTheme ? 'dark' : ''">
+  <div id="app" :class="theme">
     <el-container>
       <el-header class="primary">
         <header-content />
@@ -19,8 +19,8 @@ export default {
     HeaderContent
   },
   computed: {
-    darkTheme () {
-      return this.$store.state.template.darkTheme
+    theme () {
+      return this.$store.state.template.theme
     }
   },
   created () {

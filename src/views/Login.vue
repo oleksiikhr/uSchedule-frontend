@@ -1,5 +1,5 @@
 <template>
-  <div id="login-page">
+  <div id="login-page" :class="theme">
     <h1>Авторизация</h1>
     <el-form label-width="60px" ref="form" :model="form">
       <el-form-item label="Логин">
@@ -30,6 +30,11 @@ export default {
   },
   mounted () {
     this.$nextTick(() => this.$refs.login.focus())
+  },
+  computed: {
+    theme () {
+      return this.$store.state.template.theme
+    }
   },
   methods: {
     fetchAuth () {

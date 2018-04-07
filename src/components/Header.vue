@@ -1,5 +1,5 @@
 <template>
-  <div :class="'toolbar' + (darkTheme ? ' black' : '')">
+  <div :class="'toolbar' + theme">
     <router-link to="/" class="logo">
       <!-- TODO LOGO (img, svg) -->
       <!-- TODO Animate* on hover -->
@@ -54,8 +54,8 @@ export default {
     classSearch () {
       return 'search' + (this.search.focused ? ' is--focused' : '')
     },
-    darkTheme () {
-      return this.$store.state.template.darkTheme
+    theme () {
+      return this.$store.state.template.theme
     }
   },
   methods: {
