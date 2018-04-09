@@ -1,5 +1,5 @@
 <template>
-  <div :class="'toolbar' + theme">
+  <div :class="'toolbar ' + theme">
     <router-link to="/" class="logo">
       <!-- TODO LOGO (img, svg) -->
       <!-- TODO Animate* on hover -->

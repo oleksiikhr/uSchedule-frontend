@@ -152,13 +152,7 @@ a {
     h1 {
       color: #fff;
     }
-    small {
-      color: rgba(255, 255, 255, .85);
-      > a {
-        color: #c59090;
-      }
-    }
-    label {
+    small, label {
       color: rgba(255, 255, 255, .85);
     }
   }
