@@ -77,12 +77,12 @@ export default {
 .logo {
   display: flex;
   align-items: center;
+  width: 200px;
   height: 46px;
   font-size: 20px;
   font-weight: 500;
   color: #fff;
   text-decoration: none !important;
-  padding-right: 60px;
   &:hover {
     color: #fff;
   }

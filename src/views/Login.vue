@@ -73,7 +73,7 @@ a {
 #login-page {
   display: flex;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 20px auto 0;
 }
 
 .left, .right {
