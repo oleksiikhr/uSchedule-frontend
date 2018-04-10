@@ -97,7 +97,7 @@ a {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(14, 27, 49, 0.7);
+    background: rgba(57, 69, 90, 0.7);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
   }

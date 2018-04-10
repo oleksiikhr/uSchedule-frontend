@@ -1,7 +1,7 @@
 <template>
   <!-- TODO Store default-active* -->
-  <el-menu router>
-    <el-menu-item v-for="(item, index) in items" :key="index" :index="item.route">
+  <el-menu default-active="/admin/" router>
+    <el-menu-item v-for="(item, index) in items" :key="index" :index="'/admin/' + item.route">
       <i class="material-icons">{{ item.icon }}</i>
       <span>{{ item.name }}</span>
     </el-menu-item>
@@ -17,7 +17,8 @@ export default {
       // TODO Correct route links
       items: [
         { route: '', name: 'Профиль', icon: 'account_balance' },
-        { route: '/admin/teachers/', name: 'Преподаватели', icon: 'people' }
+        { route: 'teachers', name: 'Преподаватели', icon: 'people' },
+        { route: 'subjects', name: 'Предметы', icon: 'book' }
       ]
     }
   }

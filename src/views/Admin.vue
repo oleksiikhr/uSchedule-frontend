@@ -4,8 +4,7 @@
       <nav-menu />
     </el-aside>
     <el-main>
-      Content
-      <!-- TODO sub routes -->
+      <router-view />
     </el-main>
   </el-container>
 </template>
