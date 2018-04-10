@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/views/Login'
+import Schedule from '@/views/Schedule'
 import Admin from '@/views/Admin'
 import DashboardAdmin from '@/views/admin/Dashboard'
 import TeachersAdmin from '@/views/admin/Teachers'
@@ -13,6 +14,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/schedule',
+      name: 'schedule',
+      component: Schedule
     },
     {
       path: '/admin',

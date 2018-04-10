@@ -18,6 +18,9 @@
       <button @click="changeDarkTheme()" class="h-btn-icon">
         <i class="material-icons">opacity</i>
       </button>
+      <router-link to="/schedule" class="h-btn-icon">
+        <i class="material-icons">schedule</i>
+      </router-link>
       <!-- TODO FIXME if auth (Notifications) -->
       <router-link to="/notifications" class="h-btn-icon">
         <i class="material-icons">notifications_none</i>
