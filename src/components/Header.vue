@@ -15,15 +15,8 @@
     </div>
 
     <div class="right">
-      <button @click="changeDarkTheme()" class="h-btn-icon">
-        <i class="material-icons">opacity</i>
-      </button>
       <router-link to="/schedule" class="h-btn-icon">
         <i class="material-icons">schedule</i>
-      </router-link>
-      <!-- TODO FIXME if auth (Notifications) -->
-      <router-link to="/notifications" class="h-btn-icon">
-        <i class="material-icons">notifications_none</i>
       </router-link>
       <!-- TODO FIXME if auth && admin (Admin page) -->
       <router-link to="/admin" class="h-btn-icon">
@@ -32,6 +25,13 @@
       <!-- TODO FIXME if auth (User panel) -->
       <!-- TODO Component -->
 
+      <!-- TODO FIXME if auth (Notifications) + drop-down box* -->
+      <router-link to="/notifications" class="h-btn-icon">
+        <i class="material-icons">notifications_none</i>
+      </router-link>
+      <button @click="changeDarkTheme()" class="h-btn-icon">
+        <i class="material-icons">opacity</i>
+      </button>
       <!-- TODO FIXME if not auth -->
       <router-link to="/login" class="h-btn">
         Авторизация

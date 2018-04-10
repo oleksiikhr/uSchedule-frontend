@@ -13,7 +13,7 @@
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item, index) in items" :key="index">
+      <tr v-for="(item, index) in items" :key="index" :class="getClassRow(index)">
         <td>{{ index + 1 }}</td>
         <td>{{ item.start_time }}</td>
         <td>{{ item.end_time }}</td>
@@ -49,17 +49,42 @@ export default {
   methods: {
     compareTime (index) {
       if (!this.items[index + 1]) {
-        return 0
+        return ''
       }
 
-      const [fHour, fMinute] = this.items[index].end_time.split(':')
-      const [sHour, sMinute] = this.items[index + 1].start_time.split(':')
+      const [fHour, fMinute] = this.items[index].end_time.split(':').map(Number)
+      const [sHour, sMinute] = this.items[index + 1].start_time.split(':').map(Number)
 
-      const start = fHour * 60 + Number(fMinute)
-      const end = sHour * 60 + Number(sMinute)
+      const start = fHour * 60 + fMinute
+      const end = sHour * 60 + sMinute
       const diff = end - start
 
       return Math.floor(diff / 60) + ':' + diff % 60
+    },
+    getClassRow (index) {
+      const date = new Date()
+      const hour = date.getHours()
+      const minute = date.getMinutes()
+      const time = hour * 60 + minute
+
+      const [startTimeHour, startTimeMinute] = this.items[index].start_time.split(':').map(Number)
+      const [endTimeHour, endTimeMinute] = this.items[index].end_time.split(':').map(Number)
+
+      const startTime = startTimeHour * 60 + startTimeMinute
+      const endTime = endTimeHour * 60 + endTimeMinute
+
+      if (time >= startTime && time < endTime) {
+        return 'current work'
+      }
+
+      if (this.items[index + 1]) {
+        const [nextStartTimeHour, nextStartTimeMinute] = this.items[index + 1].start_time.split(':').map(Number)
+        const nextStartTime = nextStartTimeHour * 60 + nextStartTimeMinute
+
+        if (time >= endTime && time < nextStartTime) {
+          return 'current rest'
+        }
+      }
     }
   }
 }
@@ -86,7 +111,7 @@ table {
   width: 100%;
   border-collapse: collapse;
   border-spacing: 0;
-  font-size: 20px;
+  font-size: 18px;
   text-align: center;
 }
 
@@ -121,6 +146,25 @@ td {
   padding: 20px;
 }
 
+.current {
+  &.work {
+    td:nth-child(2), td:nth-child(3) {
+      border: 1px solid #688290;
+    }
+    td:nth-child(2) {
+      border-right: 0;
+    }
+    td:nth-child(3) {
+      border-left: 0;
+    }
+  }
+  &.rest {
+    td:nth-child(4) {
+      border: 1px solid #688290;
+    }
+  }
+}
+
 // Dark
 
 .dark {
@@ -144,6 +188,18 @@ td {
   }
   tr {
     border-color: #5f5f5f
+  }
+  .current {
+    &.work {
+      td:nth-child(2), td:nth-child(3) {
+        border-color: #d29494;
+      }
+    }
+    &.rest {
+      td:nth-child(4) {
+        border-color: #d29494;
+      }
+    }
   }
 }
 
