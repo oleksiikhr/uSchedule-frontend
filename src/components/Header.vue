@@ -1,5 +1,5 @@
 <template>
-  <div :class="'toolbar' + theme">
+  <div :class="'toolbar ' + theme">
     <router-link to="/" class="logo">
       <!-- TODO LOGO (img, svg) -->
       <!-- TODO Animate* on hover -->
@@ -15,12 +15,8 @@
     </div>
 
     <div class="right">
-      <button @click="changeDarkTheme()" class="h-btn-icon">
-        <i class="material-icons">opacity</i>
-      </button>
-      <!-- TODO FIXME if auth (Notifications) -->
-      <router-link to="/notifications" class="h-btn-icon">
-        <i class="material-icons">notifications_none</i>
+      <router-link to="/schedule" class="h-btn-icon">
+        <i class="material-icons">schedule</i>
       </router-link>
       <!-- TODO FIXME if auth && admin (Admin page) -->
       <router-link to="/admin" class="h-btn-icon">
@@ -29,6 +25,13 @@
       <!-- TODO FIXME if auth (User panel) -->
       <!-- TODO Component -->
 
+      <!-- TODO FIXME if auth (Notifications) + drop-down box* -->
+      <router-link to="/notifications" class="h-btn-icon">
+        <i class="material-icons">notifications_none</i>
+      </router-link>
+      <button @click="changeDarkTheme()" class="h-btn-icon">
+        <i class="material-icons">opacity</i>
+      </button>
       <!-- TODO FIXME if not auth -->
       <router-link to="/login" class="h-btn">
         Авторизация
@@ -77,12 +80,12 @@ export default {
 .logo {
   display: flex;
   align-items: center;
+  width: 200px;
   height: 46px;
   font-size: 20px;
   font-weight: 500;
   color: #fff;
   text-decoration: none !important;
-  padding-right: 60px;
   &:hover {
     color: #fff;
   }

@@ -73,7 +73,7 @@ a {
 #login-page {
   display: flex;
   max-width: 800px;
-  margin: 0 auto;
+  margin: 20px auto 0;
 }
 
 .left, .right {
@@ -97,7 +97,7 @@ a {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(14, 27, 49, 0.7);
+    background: rgba(57, 69, 90, 0.7);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
   }
@@ -152,13 +152,7 @@ a {
     h1 {
       color: #fff;
     }
-    small {
-      color: rgba(255, 255, 255, .85);
-      > a {
-        color: #c59090;
-      }
-    }
-    label {
+    small, label {
       color: rgba(255, 255, 255, .85);
     }
   }

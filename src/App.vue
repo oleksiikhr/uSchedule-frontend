@@ -42,6 +42,10 @@ header {
   box-shadow: 0 0 1px 0 #4c4c4c;
 }
 
+.el-main {
+  padding: 0;
+}
+
 // Dark Theme
 .dark {
   &#app {
