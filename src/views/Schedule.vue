@@ -1,44 +1,34 @@
 <template>
   <div id="schedule" :class="theme">
     <h1>Расписание звонков</h1>
-    <!-- TODO Loading process -->
-    <!-- TODO Current time** -->
     <table>
       <thead>
       <tr>
         <td><i class="material-icons">format_list_numbered</i></td>
         <td><i class="material-icons">alarm</i></td>
         <td><i class="material-icons">alarm_off</i></td>
-        <td><i class="material-icons">restaurant</i></td>
+        <td v-if="schedule.show.rest"><i class="material-icons">restaurant</i></td>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item, index) in items" :key="index" :class="getClassRow(index)">
+      <tr v-for="(item, index) in schedule.time" :key="index" :class="getClassRow(index)">
         <td>{{ index + 1 }}</td>
-        <td>{{ item.start_time }}</td>
-        <td>{{ item.end_time }}</td>
-        <td>{{ compareTime(index) }}</td>
+        <td>{{ item.start }}</td>
+        <td>{{ item.end }}</td>
+        <td v-if="schedule.show.rest">{{ compareTime(index) }}</td>
       </tr>
       </tbody>
     </table>
-    <!-- TODO: button for edit -->
   </div>
 </template>
 
 <script>
+import { schedule } from '../config'
+
 export default {
   data () {
     return {
-      // FIXME Transfer to vuex store
-      items: [
-        { id: 1, lesson_num: 1, start_time: '8:20', end_time: '9:40' },
-        { id: 5, lesson_num: 2, start_time: '9:55', end_time: '11:15' },
-        { id: 2, lesson_num: 3, start_time: '11:50', end_time: '13:10' },
-        { id: 3, lesson_num: 4, start_time: '13:30', end_time: '14:50' },
-        { id: 4, lesson_num: 5, start_time: '15:00', end_time: '16:20' },
-        { id: 7, lesson_num: 6, start_time: '16:30', end_time: '17:50' },
-        { id: 8, lesson_num: 7, start_time: '18:00', end_time: '19:20' }
-      ]
+      schedule
     }
   },
   computed: {
@@ -48,27 +38,27 @@ export default {
   },
   methods: {
     compareTime (index) {
-      if (!this.items[index + 1]) {
+      if (!this.schedule.time[index + 1]) {
         return ''
       }
 
-      const [fHour, fMinute] = this.items[index].end_time.split(':').map(Number)
-      const [sHour, sMinute] = this.items[index + 1].start_time.split(':').map(Number)
+      const [fHour, fMinute] = this.schedule.time[index].end.split(':').map(Number)
+      const [sHour, sMinute] = this.schedule.time[index + 1].start.split(':').map(Number)
 
-      const start = fHour * 60 + fMinute
-      const end = sHour * 60 + sMinute
-      const diff = end - start
+      const diff = (sHour * 60 + sMinute) - (fHour * 60 + fMinute)
 
       return Math.floor(diff / 60) + ':' + diff % 60
     },
     getClassRow (index) {
-      const date = new Date()
-      const hour = date.getHours()
-      const minute = date.getMinutes()
-      const time = hour * 60 + minute
+      if (!this.schedule.show.current) {
+        return
+      }
 
-      const [startTimeHour, startTimeMinute] = this.items[index].start_time.split(':').map(Number)
-      const [endTimeHour, endTimeMinute] = this.items[index].end_time.split(':').map(Number)
+      const date = new Date()
+      const time = date.getHours() * 60 + date.getMinutes()
+
+      const [startTimeHour, startTimeMinute] = this.schedule.time[index].start.split(':').map(Number)
+      const [endTimeHour, endTimeMinute] = this.schedule.time[index].end.split(':').map(Number)
 
       const startTime = startTimeHour * 60 + startTimeMinute
       const endTime = endTimeHour * 60 + endTimeMinute
@@ -77,8 +67,8 @@ export default {
         return 'current work'
       }
 
-      if (this.items[index + 1]) {
-        const [nextStartTimeHour, nextStartTimeMinute] = this.items[index + 1].start_time.split(':').map(Number)
+      if (this.schedule.time[index + 1]) {
+        const [nextStartTimeHour, nextStartTimeMinute] = this.schedule.time[index + 1].start.split(':').map(Number)
         const nextStartTime = nextStartTimeHour * 60 + nextStartTimeMinute
 
         if (time >= endTime && time < nextStartTime) {
