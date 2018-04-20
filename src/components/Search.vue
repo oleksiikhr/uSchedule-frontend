@@ -2,8 +2,10 @@
   <div :class="classSearch">
     <div class="input-group primary--text">
       <i class="material-icons">search</i>
-      <input placeholder="Поиск" @focus="focused = true" @blur="focused = false">
-      <!-- TODO Clear input X -->
+      <input placeholder="Поиск" v-model="input" @focus="focus = true" @blur="focus = false">
+      <a v-if="this.input" href="#" class="close" @click.prevent="clearInput()">
+        <i class="material-icons">clear</i>
+      </a>
     </div>
   </div>
 </template>
@@ -12,12 +14,19 @@
 export default {
   data () {
     return {
-      focused: false
+      input: '',
+      focus: false
     }
   },
   computed: {
     classSearch () {
-      return 'search' + (this.focused ? ' is--focused' : '')
+      return 'search' + (this.focus ? ' is--focused' : '')
+    }
+  },
+  methods: {
+    clearInput () {
+      this.input = ''
+      this.focus = false
     }
   }
 }
@@ -52,6 +61,7 @@ export default {
       min-width: 40px;
       transition: 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
       color: rgba(0, 0, 0, 0.54);
+      cursor: context-menu;
     }
     > input {
       color: rgba(0, 0, 0, 0.87);
@@ -69,6 +79,17 @@ export default {
         outline: none;
       }
     }
+  }
+}
+
+.close {
+  font-size: 0;
+  color: #333;
+  opacity: .3;
+  margin-left: 16px;
+  text-align: right;
+  &:hover {
+    opacity: 1;
   }
 }
 
