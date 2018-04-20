@@ -2,15 +2,32 @@
   <div :class="classSearch">
     <div class="input-group primary--text">
       <i class="material-icons">search</i>
-      <input placeholder="Поиск" v-model="input" @focus="focus = true" @blur="focus = false">
-      <a v-if="this.input" href="#" class="close" @click.prevent="clearInput()">
+      <input placeholder="Поиск" v-model="input" @focus="focus = true">
+      <a v-if="this.input || focus" href="#" class="close" @click.prevent="clearInput()">
         <i class="material-icons">clear</i>
+      </a>
+    </div>
+    <div v-if="focus" class="result" @click="focus = false">
+      <!--TODO data from API-->
+      <!--TODO Transfer to store (data)-->
+      <!--FIXME Basic structure, html (delete*)-->
+      <!--FIXME Overflow html-->
+      <a href="#" v-for="section in filterSectionsSite.site" :key="section.link" @click.prevent="go(section.link)"
+         style="color: #fff;display: block;margin-bottom: 20px">
+        {{ section.name }}
+      </a>
+
+      <a href="#" v-for="section in filterSectionsSite.admin" :key="section.link" @click.prevent="go(section.link)"
+         style="color: #fff;display: block;margin-bottom: 20px;float: right">
+        {{ section.name }}
       </a>
     </div>
   </div>
 </template>
 
 <script>
+import { sections } from '../config'
+
 export default {
   data () {
     return {
@@ -19,6 +36,24 @@ export default {
     }
   },
   computed: {
+    filterSectionsSite () {
+      let search = this.input.toLowerCase().trim()
+      let result = []
+
+      if (!search) {
+        return sections.items
+      }
+
+      for (let item in sections.items) {
+        result[item] = sections.items[item].filter(section => {
+          if (section.name.toLowerCase().indexOf(search) !== -1) {
+            return section
+          }
+        })
+      }
+
+      return result
+    },
     classSearch () {
       return 'search' + (this.focus ? ' is--focused' : '')
     }
@@ -27,6 +62,10 @@ export default {
     clearInput () {
       this.input = ''
       this.focus = false
+    },
+    go (link) {
+      this.clearInput()
+      this.$router.push(link)
     }
   }
 }
@@ -37,7 +76,6 @@ export default {
   display: flex;
   flex: 1 1;
   flex-wrap: wrap;
-  position: relative;
   padding: 0;
   border-radius: 2px;
   background: #fff;
@@ -91,6 +129,18 @@ export default {
   &:hover {
     opacity: 1;
   }
+}
+
+// Result
+// TODO Dark
+.result {
+  position: absolute;
+  height: calc(100vh - 64px);
+  width: 100%;
+  top: 64px;
+  left: 0;
+  background: rgba(38, 51, 70, 0.8);
+  z-index: 99999;
 }
 
 // Dark
