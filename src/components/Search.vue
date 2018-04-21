@@ -45,7 +45,7 @@ export default {
         return sections.items
       }
 
-      // Lose references
+      // Lost references
       let res = JSON.parse(JSON.stringify(sections.items))
       search = search.toLocaleLowerCase().trim()
 

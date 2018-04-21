@@ -1,5 +1,4 @@
 <template>
-  <!-- TODO Store default-active* -->
   <el-menu :default-active="routeFullPath" router>
     <el-menu-item v-for="(item, index) in items" :key="index" :index="'/admin' + item.route">
       <i class="material-icons">{{ item.icon }}</i>

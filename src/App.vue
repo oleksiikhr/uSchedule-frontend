@@ -18,6 +18,9 @@ export default {
   components: {
     HeaderContent
   },
+  created () {
+    this.$store.commit('GET_DARK_THEME')
+  },
   computed: {
     classFocusSearch () {
       return this.$store.state.template.isFocusSearch ? ' is--search' : ''
@@ -25,9 +28,6 @@ export default {
     theme () {
       return this.$store.state.template.theme
     }
-  },
-  created () {
-    this.$store.commit('GET_DARK_THEME')
   }
 }
 </script>
