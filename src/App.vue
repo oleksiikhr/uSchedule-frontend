@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="theme">
+  <div id="app" :class="theme + (isFocusSearch ? ' is--search' : '')">
     <el-container>
       <el-header class="primary">
         <header-content />
@@ -19,6 +19,9 @@ export default {
     HeaderContent
   },
   computed: {
+    isFocusSearch () {
+      return this.$store.state.template.isFocusSearch
+    },
     theme () {
       return this.$store.state.template.theme
     }
@@ -33,6 +36,13 @@ export default {
 #app {
   min-height: 100vh;
   background: #fbfbfb;
+  &.is--search {
+    height: 100vh;
+    overflow: hidden;
+    .el-main {
+      filter: blur(5px)
+    }
+  }
 }
 
 header {

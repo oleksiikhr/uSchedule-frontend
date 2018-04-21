@@ -2,12 +2,12 @@
   <div :class="classSearch">
     <div class="input-group primary--text">
       <i class="material-icons">search</i>
-      <input placeholder="Поиск" v-model="input" @focus="focus = true">
+      <input placeholder="Поиск" v-model="input" @focus="changeFocus(true)">
       <a v-if="input || focus" href="#" class="close" @click.prevent="clearInput()">
         <i class="material-icons">clear</i>
       </a>
     </div>
-    <div v-if="focus" class="result" @click="focus = false">
+    <div v-if="focus" class="result" @click="changeFocus(false)">
       <!--TODO data from API-->
       <!--TODO Transfer to store (data)-->
       <!--FIXME Basic structure, html (delete*)-->
@@ -16,8 +16,8 @@
         <div class="items" v-for="(item, i) in filterSectionsSite" :key="i">
           <p style="color: #fff">{{ item.name }}</p>
           <div class="item" style="color: #fff" v-for="(sub, j) in item.items" :key="j">
-            <router-link v-if="sub.link" :to="sub.link">{{ sub.name }}</router-link>
-            <a v-else :href="sub.href" target="_blank">{{ sub.name }}</a>
+            <a v-if="sub.link" href="#" @click.prevent="go(sub.link)">{{ sub.name }}</a>
+            <a v-else :href="sub.href" target="_blank" rel="noreferrer">{{ sub.name }}</a>
           </div>
         </div>
       </div>
@@ -31,11 +31,13 @@ import { sections } from '../config'
 export default {
   data () {
     return {
-      input: '',
-      focus: false
+      input: ''
     }
   },
   computed: {
+    focus () {
+      return this.$store.state.template.isFocusSearch
+    },
     filterSectionsSite () {
       let search = this.input
 
@@ -62,9 +64,12 @@ export default {
     }
   },
   methods: {
+    changeFocus (bool) {
+      this.$store.commit('SET_FOCUS_SEARCH', bool)
+    },
     clearInput () {
       this.input = ''
-      this.focus = false
+      this.changeFocus(false)
     },
     go (link) {
       this.clearInput()
@@ -137,13 +142,19 @@ export default {
 // Result
 // TODO Dark
 .result {
-  position: absolute;
-  min-height: calc(100vh - 64px);
-  width: 100%;
+  position: fixed;
   top: 64px;
   left: 0;
+  width: 100%;
+  height: calc(100% - 64px);
+  overflow: auto;
   background: rgba(38, 51, 70, 0.8);
   z-index: 99999;
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
 }
 
 // Dark
