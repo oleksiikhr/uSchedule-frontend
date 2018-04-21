@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="theme + (isFocusSearch ? ' is--search' : '')">
+  <div id="app" :class="theme + classFocusSearch">
     <el-container>
       <el-header class="primary">
         <header-content />
@@ -19,8 +19,8 @@ export default {
     HeaderContent
   },
   computed: {
-    isFocusSearch () {
-      return this.$store.state.template.isFocusSearch
+    classFocusSearch () {
+      return this.$store.state.template.isFocusSearch ? ' is--search' : ''
     },
     theme () {
       return this.$store.state.template.theme
