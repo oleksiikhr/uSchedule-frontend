@@ -3,7 +3,7 @@
     <div class="input-group primary--text">
       <i class="material-icons">search</i>
       <input placeholder="Поиск" v-model="input" @focus="focus = true">
-      <a v-if="this.input || focus" href="#" class="close" @click.prevent="clearInput()">
+      <a v-if="input || focus" href="#" class="close" @click.prevent="clearInput()">
         <i class="material-icons">clear</i>
       </a>
     </div>
@@ -12,15 +12,15 @@
       <!--TODO Transfer to store (data)-->
       <!--FIXME Basic structure, html (delete*)-->
       <!--FIXME Overflow html-->
-      <a href="#" v-for="section in filterSectionsSite.site" :key="section.link" @click.prevent="go(section.link)"
-         style="color: #fff;display: block;margin-bottom: 20px">
-        {{ section.name }}
-      </a>
-
-      <a href="#" v-for="section in filterSectionsSite.admin" :key="section.link" @click.prevent="go(section.link)"
-         style="color: #fff;display: block;margin-bottom: 20px;float: right">
-        {{ section.name }}
-      </a>
+      <div class="right">
+        <div class="items" v-for="(item, i) in filterSectionsSite" :key="i">
+          <p style="color: #fff">{{ item.name }}</p>
+          <div class="item" style="color: #fff" v-for="(sub, j) in item.items" :key="j">
+            <router-link v-if="sub.link" :to="sub.link">{{ sub.name }}</router-link>
+            <a v-else :href="sub.href" target="_blank">{{ sub.name }}</a>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -37,22 +37,25 @@ export default {
   },
   computed: {
     filterSectionsSite () {
-      let search = this.input.toLowerCase().trim()
-      let result = []
+      let search = this.input
 
       if (!search) {
         return sections.items
       }
 
-      for (let item in sections.items) {
-        result[item] = sections.items[item].filter(section => {
+      // Lose references
+      let res = JSON.parse(JSON.stringify(sections.items))
+      search = search.toLocaleLowerCase().trim()
+
+      for (let [i, item] of res.entries()) {
+        res[i].items = item.items.filter(section => {
           if (section.name.toLowerCase().indexOf(search) !== -1) {
             return section
           }
         })
       }
 
-      return result
+      return res
     },
     classSearch () {
       return 'search' + (this.focus ? ' is--focused' : '')
@@ -135,7 +138,7 @@ export default {
 // TODO Dark
 .result {
   position: absolute;
-  height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
   width: 100%;
   top: 64px;
   left: 0;

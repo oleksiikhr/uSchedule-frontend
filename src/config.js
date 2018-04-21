@@ -16,15 +16,28 @@ export const schedule = {
 
 // TODO setting (show or no)
 export const sections = {
-  items: {
-    site: [
-      { name: 'Главная страница', link: '/' },
-      { name: 'Авторизация', link: '/login' },
-      { name: 'Расписание звонков', link: '/schedule' }
-    ],
-    admin: [
-      { name: 'Профиль', link: '/admin' },
-      { name: 'Преподователи', link: '/admin/teachers' }
-    ]
-  }
+  items: [
+    {
+      name: 'Разделы сайта',
+      items: [
+        { name: 'Главная страница', link: '/' },
+        { name: 'Авторизация', link: '/login' },
+        { name: 'Расписание звонков', link: '/schedule' }
+      ]
+    },
+    {
+      name: 'Разделы админки',
+      items: [
+        { name: 'Профиль', link: '/admin' },
+        { name: 'Преподаватели', link: '/admin/teachers' },
+        { name: 'Предметы', link: '/admin/subjects' }
+      ]
+    },
+    {
+      name: 'Прочее',
+      items: [
+        { name: 'Сайт', href: 'https://example.com/' }
+      ]
+    }
+  ]
 }
