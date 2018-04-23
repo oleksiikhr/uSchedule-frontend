@@ -1,6 +1,7 @@
 const state = {
   darkTheme: false,
-  theme: 'light'
+  theme: 'light',
+  isFocusSearch: false
 }
 
 const mutations = {
@@ -14,6 +15,9 @@ const mutations = {
     state.darkTheme = !state.darkTheme
     state.theme = state.darkTheme ? 'dark' : 'light'
     localStorage.setItem('darkTheme', +state.darkTheme)
+  },
+  SET_FOCUS_SEARCH (state, bool) {
+    state.isFocusSearch = bool
   }
 }
 

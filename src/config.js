@@ -13,3 +13,32 @@ export const schedule = {
     { start: '18:00', end: '19:20' }
   ]
 }
+
+// TODO setting (show or no)
+export const sections = {
+  items: [
+    {
+      name: 'Сайт',
+      items: [
+        { name: 'Главная страница', link: '/' },
+        { name: 'Авторизация', link: '/login' },
+        { name: 'Расписание звонков', link: '/schedule' }
+      ]
+    },
+    {
+      name: 'Админка',
+      items: [
+        { name: 'Настройки', link: '/admin' },
+        { name: 'Преподаватели', link: '/admin/teachers' },
+        { name: 'Предметы', link: '/admin/subjects' }
+      ]
+    },
+    {
+      name: 'Внешние ресурсы',
+      items: [
+        { name: 'Официальный сайт', href: 'https://example.com/' },
+        { name: 'Google карта', href: 'https://example.com/' }
+      ]
+    }
+  ]
+}

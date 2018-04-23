@@ -2,7 +2,7 @@
 import Vue from 'vue'
 import App from './App'
 // import axios from 'axios'
-// import moment from 'moment'
+import moment from 'moment'
 import router from './router'
 import store from './store/index'
 import ElementUI from 'element-ui'
@@ -12,10 +12,14 @@ import lang from 'element-ui/lib/locale/lang/ru-RU'
 import './assets/scss/main.scss'
 
 Vue.use(ElementUI, lang)
-
-// moment.locale()
+moment.locale('ru')
 
 Vue.config.productionTip = false
+
+// Router
+router.beforeEach((to, from, next) => {
+  next()
+})
 
 /* eslint-disable no-new */
 new Vue({

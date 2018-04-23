@@ -1,5 +1,5 @@
 <template>
-  <div id="app" :class="theme">
+  <div id="app" :class="theme + classFocusSearch">
     <el-container>
       <el-header class="primary">
         <header-content />
@@ -18,13 +18,16 @@ export default {
   components: {
     HeaderContent
   },
+  created () {
+    this.$store.commit('GET_DARK_THEME')
+  },
   computed: {
+    classFocusSearch () {
+      return this.$store.state.template.isFocusSearch ? ' is--search' : ''
+    },
     theme () {
       return this.$store.state.template.theme
     }
-  },
-  created () {
-    this.$store.commit('GET_DARK_THEME')
   }
 }
 </script>
@@ -33,6 +36,13 @@ export default {
 #app {
   min-height: 100vh;
   background: #fbfbfb;
+  &.is--search {
+    height: 100vh;
+    overflow: hidden;
+    .el-main {
+      filter: blur(5px)
+    }
+  }
 }
 
 header {
