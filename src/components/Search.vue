@@ -209,14 +209,15 @@ export default {
   > .item {
     > a {
       display: block;
-      padding: 7px;
+      padding: 9px;
       margin-bottom: 7px;
-      border: 1px solid #969696;
+      border-left: 2px solid #8c8c8c;
       background: rgba(0, 0, 0, .1);
       color: rgba(255, 255, 255, 0.87);
+      font-size: 0.9rem;
       &:hover {
         background: rgba(0, 0, 0, .3);
-        border: 1px solid transparent;
+        border-color: transparent;
       }
     }
   }

@@ -26,6 +26,13 @@ export const sections = {
       ]
     },
     {
+      name: 'Аккаунт',
+      items: [
+        { name: 'Профиль', link: '/profile' },
+        { name: 'Настройки', link: '/settings' }
+      ]
+    },
+    {
       name: 'Админка',
       items: [
         { name: 'Настройки', link: '/admin' },
