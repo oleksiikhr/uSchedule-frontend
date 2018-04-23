@@ -34,9 +34,10 @@ export const sections = {
       ]
     },
     {
-      name: 'Прочее',
+      name: 'Внешние ресурсы',
       items: [
-        { name: 'Сайт', href: 'https://example.com/' }
+        { name: 'Официальный сайт', href: 'https://example.com/' },
+        { name: 'Google карта', href: 'https://example.com/' }
       ]
     }
   ]

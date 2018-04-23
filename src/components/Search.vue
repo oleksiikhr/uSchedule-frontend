@@ -19,7 +19,7 @@
         </div>
         <div class="right">
           <!--TODO has access-->
-          <div class="r-items" v-for="(item, i) in filterSectionsSite" :key="i">
+          <div class="r-items" v-for="(item, i) in filterSectionsSite" :key="i" v-if="item.items.length > 0">
             <span class="title">{{ item.name }}</span>
             <div class="item" v-for="(sub, j) in item.items" :key="j">
               <a v-if="sub.link" href="#" @click.prevent="go(sub.link)">{{ sub.name }}</a>
