@@ -18,7 +18,7 @@ export const schedule = {
 export const sections = {
   items: [
     {
-      name: 'Разделы сайта',
+      name: 'Сайт',
       items: [
         { name: 'Главная страница', link: '/' },
         { name: 'Авторизация', link: '/login' },
@@ -26,9 +26,9 @@ export const sections = {
       ]
     },
     {
-      name: 'Разделы админки',
+      name: 'Админка',
       items: [
-        { name: 'Профиль', link: '/admin' },
+        { name: 'Настройки', link: '/admin' },
         { name: 'Преподаватели', link: '/admin/teachers' },
         { name: 'Предметы', link: '/admin/subjects' }
       ]

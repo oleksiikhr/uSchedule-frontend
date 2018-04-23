@@ -8,16 +8,23 @@
       </a>
     </div>
     <div v-if="focus" class="result" @click="changeFocus(false)">
-      <!--TODO data from API-->
-      <!--TODO Transfer to store (data)-->
-      <!--FIXME Basic structure, html (delete*)-->
-      <!--FIXME Overflow html-->
-      <div class="right">
-        <div class="items" v-for="(item, i) in filterSectionsSite" :key="i">
-          <p style="color: #fff">{{ item.name }}</p>
-          <div class="item" style="color: #fff" v-for="(sub, j) in item.items" :key="j">
-            <a v-if="sub.link" href="#" @click.prevent="go(sub.link)">{{ sub.name }}</a>
-            <a v-else :href="sub.href" target="_blank" rel="noreferrer">{{ sub.name }}</a>
+      <div class="content">
+        <div class="left">
+          <!--TODO data from API-->
+          <span style="color: #fff;">LEFT</span>
+        </div>
+        <div class="middle">
+          <!--TODO data from API-->
+          <span style="color: #fff;">MIDDLE</span>
+        </div>
+        <div class="right">
+          <!--TODO has access-->
+          <div class="r-items" v-for="(item, i) in filterSectionsSite" :key="i">
+            <span class="title">{{ item.name }}</span>
+            <div class="item" v-for="(sub, j) in item.items" :key="j">
+              <a v-if="sub.link" href="#" @click.prevent="go(sub.link)">{{ sub.name }}</a>
+              <a v-else :href="sub.href" target="_blank" rel="noreferrer">{{ sub.name }}</a>
+            </div>
           </div>
         </div>
       </div>
@@ -150,11 +157,69 @@ export default {
   overflow: auto;
   background: rgba(38, 51, 70, 0.8);
   z-index: 99999;
+  > .content {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    .left, .middle, .right {
+      width: 100%;
+    }
+    .right {
+      display: flex;
+      flex-direction: column;
+    }
+  }
 }
 
-.right {
-  display: flex;
-  flex-direction: column;
+// Right items
+.r-items {
+  margin-bottom: 30px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  > .title {
+    display: block;
+    padding-bottom: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, .87);
+    font-weight: bold;
+    font-size: 1.1rem;
+    overflow: hidden;
+    cursor: context-menu;
+    &:before, &:after {
+      content: "";
+      background: rgba(255, 255, 255, .87);
+      display: inline-block;
+      height: 1px;
+      position: relative;
+      vertical-align: middle;
+      width: 50%;
+    }
+    &:before {
+      right: 0.5em;
+      margin-left: -50%;
+    }
+    &:after {
+      left: 0.5em;
+      margin-right: -50%;
+    }
+  }
+  > .item {
+    > a {
+      display: block;
+      padding: 7px;
+      margin-bottom: 7px;
+      border: 1px solid #969696;
+      background: rgba(0, 0, 0, .1);
+      color: rgba(255, 255, 255, 0.87);
+      &:hover {
+        background: rgba(0, 0, 0, .3);
+        border: 1px solid transparent;
+      }
+    }
+  }
 }
 
 // Dark
