@@ -18,6 +18,13 @@ export const schedule = {
 export const sections = {
   items: [
     {
+      name: 'Аккаунт',
+      items: [
+        { name: 'Профиль', link: '/profile' },
+        { name: 'Настройки', link: '/settings' }
+      ]
+    },
+    {
       name: 'Сайт',
       items: [
         { name: 'Главная страница', link: '/' },
@@ -26,15 +33,9 @@ export const sections = {
       ]
     },
     {
-      name: 'Аккаунт',
-      items: [
-        { name: 'Профиль', link: '/profile' },
-        { name: 'Настройки', link: '/settings' }
-      ]
-    },
-    {
       name: 'Админка',
       items: [
+        { name: 'Главная страница', link: '/admin' },
         { name: 'Настройки', link: '/admin' },
         { name: 'Преподаватели', link: '/admin/teachers' },
         { name: 'Предметы', link: '/admin/subjects' }
