@@ -13,9 +13,9 @@
       <tbody>
       <tr v-for="(item, index) in schedule.time" :key="index" :class="getClassRow(index)">
         <td>{{ index + 1 }}</td>
-        <td>{{ item.start }}</td>
-        <td>{{ item.end }}</td>
-        <td v-if="schedule.show.rest">{{ compareTime(index) }}</td>
+        <td class="f">{{ item.start }}</td>
+        <td class="f">{{ item.end }}</td>
+        <td class="s" v-if="schedule.show.rest">{{ compareTime(index) }}</td>
       </tr>
       </tbody>
     </table>
@@ -138,19 +138,13 @@ td {
 
 .current {
   &.work {
-    td:nth-child(2), td:nth-child(3) {
-      border: 1px solid #688290;
-    }
-    td:nth-child(2) {
-      border-right: 0;
-    }
-    td:nth-child(3) {
-      border-left: 0;
+    .f {
+      color: #0288d1;
     }
   }
   &.rest {
-    td:nth-child(4) {
-      border: 1px solid #688290;
+    .s {
+      color: #0288d1;
     }
   }
 }
@@ -181,13 +175,13 @@ td {
   }
   .current {
     &.work {
-      td:nth-child(2), td:nth-child(3) {
-        border-color: #d29494;
+      .f {
+        color: #d27575;
       }
     }
     &.rest {
-      td:nth-child(4) {
-        border-color: #d29494;
+      .s {
+        color: #d27575;
       }
     }
   }

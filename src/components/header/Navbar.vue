@@ -11,10 +11,6 @@
       <button @click="go('/schedule')" class="h-btn-icon btn">
         <i class="material-icons">schedule</i>
       </button>
-      <!-- TODO FIXME if auth && admin (Admin page) -->
-      <button @click="go('/admin')" class="h-btn-icon btn">
-        <i class="material-icons">star_border</i>
-      </button>
       <!-- TODO FIXME if auth (User panel) -->
       <!-- TODO Component -->
 
