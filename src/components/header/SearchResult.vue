@@ -22,9 +22,10 @@
         </div>
       </div>
       <div class="copyright">
+        <span>Made with 💖 by:</span>
         <a v-for="profile in copyright" :key="profile.nickname" :href="'https://github.com/' + profile.nickname"
-           target="_blank" rel="noopener noreferrer">
-          {{ profile.name }}
+           target="_blank" rel="noreferrer" :title="profile.name">
+          {{ '@' + profile.nickname }}
         </a>
       </div>
     </div>
@@ -44,8 +45,8 @@ export default {
   data () {
     return {
       copyright: [
-        { name: 'Алексей Хрущ', nickname: 'alexeykhr' },
-        { name: 'Николай Сябренко', nickname: 'niksib' }
+        { name: 'Alexey Khrushch', nickname: 'alexeykhr' },
+        { name: 'Nikolay Siabrenko', nickname: 'niksib' }
       ]
     }
   },
@@ -181,10 +182,16 @@ export default {
   padding: 15px 0;
   margin-top: 25px;
   border-top: 1px solid #929292;
+  font-size: .8rem;
+  > span {
+    color: #dcdcdc;
+    margin-right: 10px;
+    font-size: 12px;
+    cursor: context-menu;
+  }
   > a {
     color: #dcdcdc;
-    margin-right: 15px;
-    font-size: .8rem;
+    margin-right: 10px;
     opacity: .6;
     &:last-child {
       margin-right: 0;
