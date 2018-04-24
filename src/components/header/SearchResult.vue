@@ -11,7 +11,7 @@
       </div>
       <div class="right">
         <!--TODO has access-->
-        <div class="r-items" v-for="(item, i) in filterSectionsSite" :key="i" v-if="item.items.length > 0">
+        <div class="r-items" v-for="(item, i) in filterSections" :key="i" v-if="item.items.length > 0">
           <span class="title">{{ item.name }}</span>
           <div class="item" v-for="(sub, j) in item.items" :key="j">
             <a v-if="sub.link" @click.prevent="go(sub.link)">{{ sub.name }}</a>
@@ -37,18 +37,19 @@ export default {
     theme () {
       return this.$store.state.template.theme
     },
-    filterSectionsSite () {
+    filterSections () {
       let search = this.search
 
       if (!search) {
         return sections.items
       }
 
-      // Lost references
-      let res = JSON.parse(JSON.stringify(sections.items))
+      let res = []
       search = search.toLocaleLowerCase().trim()
 
-      for (let [i, item] of res.entries()) {
+      for (let [i, item] of sections.items.entries()) {
+        res[i] = {}
+        res[i].name = item.name
         res[i].items = item.items.filter(section => {
           if (section.name.toLowerCase().indexOf(search) !== -1) {
             return section
