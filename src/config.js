@@ -36,7 +36,7 @@ export const sections = {
       name: 'Админка',
       items: [
         { name: 'Главная страница', link: '/admin' },
-        { name: 'Настройки', link: '/admin' },
+        { name: 'Настройки', link: '/admin/settings' },
         { name: 'Преподаватели', link: '/admin/teachers' },
         { name: 'Предметы', link: '/admin/subjects' }
       ]

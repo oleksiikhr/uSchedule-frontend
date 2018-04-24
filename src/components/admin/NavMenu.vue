@@ -16,7 +16,7 @@ export default {
         { route: '', name: 'Главная страница', icon: 'dashboard' },
         { route: '/teachers', name: 'Преподаватели', icon: 'people' },
         { route: '/subjects', name: 'Предметы', icon: 'book' },
-        { route: '/settings', name: 'Настройки', icon: 'settings' },
+        { route: '/settings', name: 'Настройки', icon: 'settings' }
       ]
     }
   },
