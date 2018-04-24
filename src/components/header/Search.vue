@@ -23,7 +23,9 @@
             <span class="title">{{ item.name }}</span>
             <div class="item" v-for="(sub, j) in item.items" :key="j">
               <a v-if="sub.link" href="#" @click.prevent="go(sub.link)">{{ sub.name }}</a>
-              <a v-else :href="sub.href" target="_blank" rel="noreferrer">{{ sub.name }}</a>
+              <a v-else :href="sub.href" target="_blank" rel="noreferrer">
+                {{ sub.name }}
+              </a>
             </div>
           </div>
         </div>
@@ -33,7 +35,7 @@
 </template>
 
 <script>
-import { sections } from '../config'
+import { sections } from '../../config'
 
 export default {
   data () {
@@ -79,7 +81,6 @@ export default {
       this.changeFocus(false)
     },
     go (link) {
-      this.clearInput()
       this.$router.push(link)
     }
   }
