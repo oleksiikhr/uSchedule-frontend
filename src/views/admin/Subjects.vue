@@ -1,5 +1,5 @@
 <template>
-  <!--FIXME Width-->
+  <!--FIXME Max Width*-->
   <div id="subjects">
     <div class="header">
       <div class="search">
@@ -18,7 +18,7 @@
 
     <div class="items" v-loading="loading">
       <template v-if="filterItems.length">
-        <a class="item" v-for="item in filterItems" :key="item.id" @click="openItem(item.id)">
+        <a class="item" v-for="item in filterItems" :key="item.id" @click="openItem(item)">
           {{ item.name }}
         </a>
       </template>
@@ -28,11 +28,18 @@
         <el-button type="primary">Добавить с таким названием</el-button>
       </div>
     </div>
+
+    <subject-dialog :dialog="dialog" :item="item" @edited="handleEdited" @deleted="handleDeleted" />
   </div>
 </template>
 
 <script>
+import SubjectDialog from '../../components/admin/dialogs/Subject'
+
 export default {
+  components: {
+    SubjectDialog
+  },
   data () {
     return {
       // TODO Delete simple data
@@ -44,9 +51,11 @@ export default {
         { id: 6, name: 'ООП' },
         { id: 7, name: 'Химия' }
       ],
+      item: {},
       search: '',
       // TODO change to true
-      loading: false
+      loading: false,
+      dialog: false
     }
   },
   mounted () {
@@ -73,9 +82,15 @@ export default {
     }
   },
   methods: {
-    openItem (id) {
-      // TODO Open dialog
-      console.log(id)
+    openItem (obj) {
+      this.item = obj
+      this.dialog = !this.dialog
+    },
+    handleEdited () {
+      // TODO
+    },
+    handleDeleted () {
+      // TODO
     }
   }
 }
