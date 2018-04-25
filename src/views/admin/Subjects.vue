@@ -12,7 +12,7 @@
         />
       </div>
       <div class="actions">
-        <el-button>Добавить</el-button>
+        <el-button @click="addItem()">Добавить</el-button>
       </div>
     </div>
 
@@ -24,21 +24,22 @@
       </template>
       <div class="no-items" v-else>
         <span>Предметы не найдены</span>
-        <!--TODO @click-->
-        <el-button type="primary">Добавить с таким названием</el-button>
+        <el-button type="primary" @click="addItem(search)">Добавить с таким названием</el-button>
       </div>
     </div>
 
-    <subject-dialog :dialog="dialog" :item="item" @edited="handleEdited" @deleted="handleDeleted" />
+    <subject-add-dialog :dialog="dialogs.add" :name="name" @added="handleAdded" />
+    <subject-edit-dialog :dialog="dialogs.edit" :item="item" @edited="handleEdited" @deleted="handleDeleted" />
   </div>
 </template>
 
 <script>
-import SubjectDialog from '../../components/admin/dialogs/Subject'
+import SubjectEditDialog from '../../components/admin/dialogs/SubjectEdit'
+import SubjectAddDialog from '../../components/admin/dialogs/SubjectAdd'
 
 export default {
   components: {
-    SubjectDialog
+    SubjectAddDialog, SubjectEditDialog
   },
   data () {
     return {
@@ -52,10 +53,14 @@ export default {
         { id: 7, name: 'Химия' }
       ],
       item: {},
+      name: '',
       search: '',
       // TODO change to true
       loading: false,
-      dialog: false
+      dialogs: {
+        add: false,
+        edit: false
+      }
     }
   },
   mounted () {
@@ -63,6 +68,7 @@ export default {
   },
   computed: {
     filterItems () {
+      // FIXME Search backend**
       let search = this.search
       let items = this.items
 
@@ -82,9 +88,17 @@ export default {
     }
   },
   methods: {
+    // TODO FetchGet
     openItem (obj) {
       this.item = obj
-      this.dialog = !this.dialog
+      this.dialogs.edit = !this.dialogs.edit
+    },
+    addItem (name = '') {
+      this.name = name
+      this.dialogs.add = !this.dialogs.add
+    },
+    handleAdded () {
+      // TODO
     },
     handleEdited () {
       // TODO
