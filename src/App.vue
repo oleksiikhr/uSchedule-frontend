@@ -2,7 +2,7 @@
   <div id="app" :class="theme + classFocusSearch">
     <el-container>
       <el-header class="primary">
-        <header-content />
+        <navbar />
       </el-header>
       <el-main>
         <router-view />
@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import HeaderContent from './components/Header'
+import Navbar from './components/Header/Navbar'
 
 export default {
   components: {
-    HeaderContent
+    Navbar
   },
   created () {
     this.$store.commit('GET_DARK_THEME')
@@ -50,6 +50,7 @@ header {
   align-items: center;
   height: 64px !important;
   box-shadow: 0 0 1px 0 #4c4c4c;
+  z-index: 999;
 }
 
 .el-main {

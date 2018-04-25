@@ -13,9 +13,10 @@ export default {
     return {
       // TODO Role v-if
       items: [
-        { route: '', name: 'Профиль', icon: 'account_balance' },
+        { route: '', name: 'Главная страница', icon: 'dashboard' },
         { route: '/teachers', name: 'Преподаватели', icon: 'people' },
-        { route: '/subjects', name: 'Предметы', icon: 'book' }
+        { route: '/subjects', name: 'Предметы', icon: 'book' },
+        { route: '/settings', name: 'Настройки', icon: 'settings' }
       ]
     }
   },

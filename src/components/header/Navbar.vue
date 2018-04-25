@@ -1,34 +1,30 @@
 <template>
   <div :class="'toolbar ' + theme">
-    <router-link to="/" class="logo">
+    <a @click="go('/')" class="logo">
       <!-- TODO LOGO (img, svg) -->
       <!-- TODO Animate* on hover -->
       uSchedule
-    </router-link>
+    </a>
     <search />
 
     <div class="right">
-      <router-link to="/schedule" class="h-btn-icon">
+      <button @click="go('/schedule')" class="h-btn-icon btn">
         <i class="material-icons">schedule</i>
-      </router-link>
-      <!-- TODO FIXME if auth && admin (Admin page) -->
-      <router-link to="/admin" class="h-btn-icon">
-        <i class="material-icons">star_border</i>
-      </router-link>
+      </button>
       <!-- TODO FIXME if auth (User panel) -->
       <!-- TODO Component -->
 
       <!-- TODO FIXME if auth (Notifications) + drop-down box* -->
-      <router-link to="/notifications" class="h-btn-icon">
+      <button @click="go('/')" class="h-btn-icon btn">
         <i class="material-icons">notifications_none</i>
-      </router-link>
-      <button @click="changeDarkTheme()" class="h-btn-icon">
+      </button>
+      <button @click="changeDarkTheme()" class="h-btn-icon btn">
         <i class="material-icons">opacity</i>
       </button>
       <!-- TODO FIXME if not auth -->
-      <router-link to="/login" class="h-btn">
+      <button @click="go('/login')" class="h-btn btn">
         Авторизация
-      </router-link>
+      </button>
 
       <!-- TODO If auth - Admin panel (icon) -->
       <!-- TODO If auth - User panel -->
@@ -38,7 +34,7 @@
 </template>
 
 <script>
-import Search from '../components/Search'
+import Search from './Search'
 
 export default {
   components: {
@@ -52,6 +48,13 @@ export default {
   methods: {
     changeDarkTheme () {
       this.$store.commit('CHANGE_DARK_THEME')
+    },
+    changeFocusSearch (bool) {
+      this.$store.commit('SET_FOCUS_SEARCH', bool)
+    },
+    go (to) {
+      this.changeFocusSearch(false)
+      this.$router.push(to)
     }
   }
 }
@@ -74,8 +77,10 @@ export default {
   font-weight: 500;
   color: #fff;
   text-decoration: none !important;
+  cursor: pointer;
   &:hover {
     color: #fff;
+    opacity: .7;
   }
 }
 
@@ -84,16 +89,24 @@ export default {
   margin-left: 20px;
 }
 
-.h-btn {
+.btn {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: 0;
+  outline: 0;
+  line-height: 0;
+  transition: .3s;
+  text-decoration: none;
+  cursor: pointer;
+  font-size: .9rem;
+}
+
+.h-btn {
   padding: 0 15px;
   margin-left: 10px;
   background: #006da9;
   color: #fff;
-  text-decoration: none;
-  transition: .3s;
   &:hover {
     background: #fff;
     color: #333;
@@ -101,21 +114,12 @@ export default {
 }
 
 .h-btn-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 0;
-  border: 0;
   background: 0;
   height: 40px;
   width: 40px;
-  cursor: pointer;
-  text-decoration: none;
   color: rgba(255, 255, 255, .85);
-  outline: 0;
   margin: 0 3px;
-  transition: .3s;
-  line-height: 0;
   &:hover {
     color: #fff;
   }
