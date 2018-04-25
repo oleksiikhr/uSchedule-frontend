@@ -9,7 +9,7 @@
       <el-input placeholder="Название" v-model="inItem.name" />
     </div>
     <span slot="footer" class="dialog-footer">
-      <el-button type="danger" class="delete" icon="el-icon-delete" @click="openDelete()"
+      <el-button type="danger" class="delete" icon="el-icon-delete" @click="openDelete()" size="small"
                  :loading="loading" :disabled="loading" />
       <el-button @click="inDialog = false">Отмена</el-button>
       <el-button type="primary" @click="fetchEdit()" :loading="loading" :disabled="loading">
@@ -97,5 +97,6 @@ export default {
 <style lang="scss" scoped>
 .delete {
   float: left;
+  height: 40px;
 }
 </style>
