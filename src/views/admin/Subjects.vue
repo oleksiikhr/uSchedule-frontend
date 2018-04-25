@@ -24,7 +24,9 @@
       </template>
       <div class="no-items" v-else>
         <span>Предметы не найдены</span>
-        <el-button type="primary" @click="addItem(search)">Добавить с таким названием</el-button>
+        <el-button v-if="search" type="primary" @click="addItem(search)">
+          Добавить с таким названием
+        </el-button>
       </div>
     </div>
 
@@ -128,6 +130,8 @@ export default {
   display: flex;
   flex-wrap: wrap;
   padding: 10px 20px;
+  align-items: flex-start;
+  min-height: 100px;
   background: #fff;
   border: 1px solid #e7e7e7;
   > .item {

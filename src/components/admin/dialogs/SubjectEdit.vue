@@ -76,7 +76,7 @@ export default {
         })
     },
     openDelete () {
-      this.$confirm('Вы действительно хотите удалить этот предмет?', 'Warning', {
+      this.$confirm('Вы действительно хотите удалить этот предмет?', this.item.name, {
         confirmButtonText: 'Да',
         cancelButtonText: 'Отмена',
         type: 'warning'

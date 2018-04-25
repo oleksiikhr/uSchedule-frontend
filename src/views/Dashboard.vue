@@ -34,8 +34,9 @@ export default {
   .admin-link {
     > a {
       display: block;
-      margin: 30px 0;
+      margin: 30px auto;
       padding: 20px;
+      max-width: 800px;
       border: 1px solid #e7e7e7;
       background: #fff;
       text-align: center;

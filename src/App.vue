@@ -50,6 +50,7 @@ header {
   align-items: center;
   height: 64px !important;
   box-shadow: 0 0 1px 0 #4c4c4c;
+  z-index: 999;
 }
 
 .el-main {
