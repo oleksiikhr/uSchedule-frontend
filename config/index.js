@@ -50,7 +50,7 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    assetsPublicPath: '/frontend', // TODO Temporary (for github)
+    assetsPublicPath: '/frontend/', // TODO Temporary (for github)
 
     /**
      * Source Maps
