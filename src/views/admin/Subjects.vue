@@ -131,7 +131,6 @@ export default {
   flex-wrap: wrap;
   padding: 10px 20px;
   align-items: flex-start;
-  min-height: 100px;
   background: #fff;
   border: 1px solid #e7e7e7;
   > .item {

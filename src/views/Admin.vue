@@ -30,6 +30,6 @@ export default {
 .el-aside {
   background: #fff;
   border-right: 1px solid #e6e6e6;
-  height: calc(100vh - 64px); // 64px - Header
+  min-height: calc(100vh - 64px); // 64px - Header
 }
 </style>

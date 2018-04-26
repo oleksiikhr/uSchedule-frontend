@@ -1,3 +1,5 @@
+export const devUrlApi = 'http://uschedule.local'
+
 export const schedule = {
   show: {
     current: true,

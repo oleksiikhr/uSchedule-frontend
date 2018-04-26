@@ -9,11 +9,11 @@
         <h1>Авторизация</h1>
         <small>Забыли пароль? <router-link to="/restore">Восстановить аккаунт.</router-link></small>
         <el-form label-position="top" :model="form" :class="theme">
-          <el-form-item label="Логин">
-            <el-input v-model="form.login" ref="login" />
+          <el-form-item label="Email">
+            <el-input type="email" v-model="form.email" ref="email" />
           </el-form-item>
           <el-form-item label="Пароль" class="bottom10">
-            <el-input v-model="form.password" />
+            <el-input type="password" v-model="form.password" />
           </el-form-item>
           <el-form-item class="bottom10">
             <el-checkbox v-model="form.remember">Запомнить пароль</el-checkbox>
@@ -48,16 +48,17 @@ export default {
   methods: {
     fetchAuth () {
       this.loading = true
-      // TODO URL Auth
-      axios.post('', this.form)
+
+      axios.post('api/auth/login', this.form)
         .then(res => {
+          // TODO If remember -> localStorage
           console.log(res.data)
           this.form = {}
           this.loading = false
         })
-        .catch(err => {
-          console.log(err.response.data)
-          this.$refs.login.focus()
+        .catch(() => {
+          this.$message.error('Логин или пароль неверный.')
+          this.$refs.email.focus()
           this.loading = false
         })
     }
@@ -73,7 +74,7 @@ a {
 #login-page {
   display: flex;
   max-width: 800px;
-  margin: 20px auto 0;
+  margin: 20px auto;
 }
 
 .left, .right {
