@@ -23,7 +23,8 @@ export const sections = {
       name: 'Аккаунт',
       items: [
         { name: 'Профиль', link: '/profile' },
-        { name: 'Настройки', link: '/settings' }
+        { name: 'Настройки', link: '/settings' },
+        { name: 'Уведомления', link: '/notifications' }
       ]
     },
     {

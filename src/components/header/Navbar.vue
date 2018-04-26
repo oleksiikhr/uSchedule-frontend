@@ -15,7 +15,7 @@
       <!-- TODO Component -->
 
       <!-- TODO FIXME if auth (Notifications) + drop-down box* -->
-      <button @click="go('/')" class="h-btn-icon btn">
+      <button v-if="false" @click="go('/')" class="h-btn-icon btn">
         <i class="material-icons">notifications_none</i>
       </button>
       <button @click="changeDarkTheme()" class="h-btn-icon btn">

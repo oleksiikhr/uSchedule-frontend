@@ -19,7 +19,7 @@
     <div class="items">
       <template v-if="!loading">
         <template v-if="filterItems.length">
-          <a class="item" v-for="item in filterItems" :key="item.id" @click="openItem(item)">
+          <a class="item" v-for="(item, index) in filterItems" :key="index" @click="openItem(item, index)">
             {{ item.name }}
           </a>
         </template>
@@ -37,8 +37,9 @@
       </div>
     </div>
 
-    <subject-add-dialog :dialog="dialogs.add" :name="name" @added="handleAdded" />
-    <subject-edit-dialog :dialog="dialogs.edit" :item="item" @edited="handleEdited" @deleted="handleDeleted" />
+    <subject-add-dialog :dialog="dialogs.add" :name="add.name" @added="handleAdded" />
+    <subject-edit-dialog :dialog="dialogs.edit" :item="edit.item" :index="edit.index" @edited="handleEdited"
+                         @deleted="handleDeleted" />
   </div>
 </template>
 
@@ -62,11 +63,15 @@ export default {
         { id: 6, name: 'ООП' },
         { id: 7, name: 'Химия' }
       ],
-      item: {},
-      name: '',
       search: '',
-      // TODO change to true
       loading: true,
+      edit: {
+        item: {},
+        index: -1
+      },
+      add: {
+        name: ''
+      },
       dialogs: {
         add: false,
         edit: false
@@ -114,12 +119,13 @@ export default {
           this.loading = false
         })
     },
-    openItem (obj) {
-      this.item = obj
+    openItem (obj, index) {
+      this.edit.item = obj
+      this.edit.index = index
       this.dialogs.edit = !this.dialogs.edit
     },
     addItem (name = '') {
-      this.name = name
+      this.add.name = name
       this.dialogs.add = !this.dialogs.add
     },
     handleAdded () {
