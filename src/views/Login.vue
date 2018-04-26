@@ -38,7 +38,7 @@ export default {
     }
   },
   mounted () {
-    this.$nextTick(() => this.$refs.login.focus())
+    this.$nextTick(() => this.$refs.email.focus())
   },
   computed: {
     theme () {
@@ -53,8 +53,7 @@ export default {
         .then(res => {
           // TODO If remember -> localStorage
           console.log(res.data)
-          this.form = {}
-          this.loading = false
+          this.$router.push('/')
         })
         .catch(() => {
           this.$message.error('Логин или пароль неверный.')
@@ -135,10 +134,6 @@ a {
   button {
     min-width: 120px;
   }
-}
-
-.bottom10 {
-  margin-bottom: 10px;
 }
 
 // Dark

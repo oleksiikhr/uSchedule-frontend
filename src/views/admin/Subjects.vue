@@ -1,6 +1,5 @@
 <template>
-  <!--FIXME Max Width*-->
-  <div id="subjects">
+  <div id="subjects" :class="'component ' + theme">
     <div class="header">
       <div class="search">
         <el-input
@@ -69,6 +68,9 @@ export default {
     this.$refs.search.focus()
   },
   computed: {
+    theme () {
+      return this.$store.state.template.theme
+    },
     filterItems () {
       // FIXME Search backend**
       let search = this.search

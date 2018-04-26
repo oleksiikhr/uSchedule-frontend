@@ -21,7 +21,7 @@ export default {
     fetchGet () {
       this.loading = true
 
-      axios.get('teachers')
+      axios.get('api/teachers')
         .then(res => {
           // TODO
           this.loading = false

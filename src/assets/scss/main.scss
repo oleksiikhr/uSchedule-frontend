@@ -40,6 +40,15 @@ a {
   text-align: right;
 }
 
+.bottom10 {
+  margin-bottom: 10px;
+}
+
+.component {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
 .el-form--label-top {
   .el-form-item__label {
     line-height: normal;
