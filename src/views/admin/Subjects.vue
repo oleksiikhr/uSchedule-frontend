@@ -11,21 +11,29 @@
         />
       </div>
       <div class="actions">
+        <el-button @click="fetchGet()" icon="el-icon-refresh" :loading="loading" :disabled="loading" />
         <el-button @click="addItem()">Добавить</el-button>
       </div>
     </div>
 
-    <div class="items" v-loading="loading">
-      <template v-if="filterItems.length">
-        <a class="item" v-for="item in filterItems" :key="item.id" @click="openItem(item)">
-          {{ item.name }}
-        </a>
+    <div class="items">
+      <template v-if="!loading">
+        <template v-if="filterItems.length">
+          <a class="item" v-for="item in filterItems" :key="item.id" @click="openItem(item)">
+            {{ item.name }}
+          </a>
+        </template>
+        <div class="no-items" v-else>
+          <span>Предметы не найдены</span>
+          <el-button v-if="search" type="primary" @click="addItem(search)">
+            Добавить с таким названием
+          </el-button>
+        </div>
       </template>
-      <div class="no-items" v-else>
-        <span>Предметы не найдены</span>
-        <el-button v-if="search" type="primary" @click="addItem(search)">
-          Добавить с таким названием
-        </el-button>
+      <div class="loading" v-else>
+        <div class="item" v-for="n in 3" :key="n">
+          ...
+        </div>
       </div>
     </div>
 
@@ -37,6 +45,7 @@
 <script>
 import SubjectEditDialog from '../../components/admin/dialogs/SubjectEdit'
 import SubjectAddDialog from '../../components/admin/dialogs/SubjectAdd'
+import axios from 'axios'
 
 export default {
   components: {
@@ -57,7 +66,7 @@ export default {
       name: '',
       search: '',
       // TODO change to true
-      loading: false,
+      loading: true,
       dialogs: {
         add: false,
         edit: false
@@ -66,6 +75,7 @@ export default {
   },
   mounted () {
     this.$refs.search.focus()
+    this.fetchGet()
   },
   computed: {
     theme () {
@@ -92,7 +102,18 @@ export default {
     }
   },
   methods: {
-    // TODO FetchGet
+    fetchGet () {
+      this.loading = true
+
+      // TODO Params
+      axios.get('api/subjects')
+        .then(res => {
+          this.loading = false
+        })
+        .catch(() => {
+          this.loading = false
+        })
+    },
     openItem (obj) {
       this.item = obj
       this.dialogs.edit = !this.dialogs.edit
@@ -161,4 +182,22 @@ export default {
   }
 }
 
+.loading {
+  display: flex;
+  > .item {
+    padding: 10px 20px;
+    margin: 10px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+    cursor: context-menu;
+    letter-spacing: 2px;
+    &:nth-child(2) {
+      padding: 10px 30px;
+    }
+    &:nth-child(3) {
+      padding: 10px 40px;
+    }
+  }
+}
+
+// TODO Dark theme
 </style>
