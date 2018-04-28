@@ -77,6 +77,7 @@ export default {
           this.loading = false
         })
         .catch(() => {
+          // TODO Show error message
           this.loading = false
         })
     },
@@ -99,14 +100,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.items {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px 20px;
-  align-items: flex-start;
-  background: #fff;
-  border: 1px solid #e7e7e7;
-}
-
 // TODO Dark theme
 </style>
