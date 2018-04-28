@@ -1,8 +1,8 @@
 <template>
   <div :class="'no-items ' + theme">
-    <span>Предметы не найдены</span>
-    <el-button v-if="search" type="primary" @click="dialog = !dialog">
-      Добавить с таким названием
+    <span>{{ search ? 'Предметы не найдены' : 'Предметы отсутствуют' }}</span>
+    <el-button type="primary" @click="dialog = !dialog">
+      {{ search ? 'Добавить с таким названием' : 'Добавить' }}
     </el-button>
 
     <add-dialog :dialog="dialog" :name="search" />

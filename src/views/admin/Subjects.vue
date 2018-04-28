@@ -12,8 +12,9 @@
 
     <div class="items">
       <template v-if="!loading">
-        <template v-if="filterItems.length">
-          <card v-for="(item, index) in filterItems" :key="index" :item="item" @open="openDialog(item, index)" />
+        <template v-if="hasItems">
+          <card v-for="(item, index) in items" :key="index" :item="item" @open="openDialog(item, index)" />
+          <!--TODO Button "+". Improved fetchGet (push array or new)-->
         </template>
         <no-items :search="search" v-else />
       </template>
@@ -40,14 +41,7 @@ export default {
   data () {
     return {
       // TODO Delete simple data
-      items: [
-        { id: 1, name: 'Информатика' },
-        { id: 2, name: 'Биология' },
-        { id: 3, name: 'Физика' },
-        { id: 5, name: 'Математика' },
-        { id: 6, name: 'ООП' },
-        { id: 7, name: 'Химия' }
-      ],
+      items: [],
       search: '',
       loading: true,
       edit: {
@@ -68,24 +62,8 @@ export default {
     theme () {
       return this.$store.state.template.theme
     },
-    filterItems () {
-      // FIXME Search backend**
-      let search = this.search
-      let items = this.items
-
-      if (!search) {
-        return items
-      }
-
-      search = search.toLocaleLowerCase().trim()
-
-      items = items.filter(subject => {
-        if (subject.name.toLowerCase().indexOf(search) !== -1) {
-          return subject
-        }
-      })
-
-      return items
+    hasItems () {
+      return this.items.length > 0
     }
   },
   methods: {
@@ -95,6 +73,7 @@ export default {
       // TODO Params
       axios.get('api/subjects')
         .then(res => {
+          // TODO response from the server
           this.loading = false
         })
         .catch(() => {
