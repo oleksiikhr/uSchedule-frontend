@@ -1,9 +1,9 @@
 <template>
-  <div id="subjects" :class="'component ' + theme">
+  <div id="subjects" :class="'component admin ' + theme">
     <div class="header">
       <div class="search">
         <el-input
-                placeholder="Поиск предмета"
+                placeholder="Поиск"
                 prefix-icon="el-icon-search"
                 v-model="search"
                 ref="search"
@@ -30,11 +30,7 @@
           </el-button>
         </div>
       </template>
-      <div class="loading" v-else>
-        <div class="item" v-for="n in 3" :key="n">
-          ...
-        </div>
-      </div>
+      <loading v-else />
     </div>
 
     <subject-add-dialog :dialog="dialogs.add" :name="add.name" @added="handleAdded" />
@@ -46,11 +42,12 @@
 <script>
 import SubjectEditDialog from '../../components/admin/dialogs/SubjectEdit'
 import SubjectAddDialog from '../../components/admin/dialogs/SubjectAdd'
+import Loading from '../../components/subjects/Loading'
 import axios from 'axios'
 
 export default {
   components: {
-    SubjectAddDialog, SubjectEditDialog
+    SubjectAddDialog, SubjectEditDialog, Loading
   },
   data () {
     return {
@@ -142,19 +139,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header {
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  max-width: 600px;
-  margin: 0 auto 20px;
-}
-
-.search {
-  flex-grow: 1;
-  margin-right: 20px;
-}
-
 .items {
   display: flex;
   flex-wrap: wrap;
@@ -163,11 +147,11 @@ export default {
   background: #fff;
   border: 1px solid #e7e7e7;
   > .item {
-    cursor: pointer;
-    padding: 10px 20px;
     margin: 10px;
+    padding: 10px 20px;
     color: rgba(0, 0, 0, .87);
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    cursor: pointer;
     transition: all 0.3s cubic-bezier(.25,.8,.25,1);
     &:hover {
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
@@ -185,23 +169,6 @@ export default {
   > span {
     margin-bottom: 20px;
     font-weight: bold;
-  }
-}
-
-.loading {
-  display: flex;
-  > .item {
-    padding: 10px 20px;
-    margin: 10px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    cursor: context-menu;
-    letter-spacing: 2px;
-    &:nth-child(2) {
-      padding: 10px 30px;
-    }
-    &:nth-child(3) {
-      padding: 10px 40px;
-    }
   }
 }
 

@@ -44,14 +44,27 @@ a {
   margin-bottom: 10px;
 }
 
-.component {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
 .el-form--label-top {
   .el-form-item__label {
     line-height: normal;
+  }
+}
+
+.component {
+  max-width: 1200px;
+  margin: 0 auto;
+  &.admin {
+    .header {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .search {
+      flex-grow: 1;
+      margin-right: 20px;
+    }
   }
 }
 
