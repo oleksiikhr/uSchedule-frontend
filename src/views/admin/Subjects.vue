@@ -12,7 +12,7 @@
       </div>
       <div class="actions">
         <el-button @click="fetchGet()" icon="el-icon-refresh" :loading="loading" :disabled="loading" />
-        <el-button @click="addItem()">Добавить</el-button>
+        <el-button @click="dialogs.add = !dialogs.add">Добавить</el-button>
       </div>
     </div>
 
@@ -23,31 +23,26 @@
             {{ item.name }}
           </a>
         </template>
-        <div class="no-items" v-else>
-          <span>Предметы не найдены</span>
-          <el-button v-if="search" type="primary" @click="addItem(search)">
-            Добавить с таким названием
-          </el-button>
-        </div>
+        <no-items :search="search" v-else />
       </template>
       <loading v-else />
     </div>
 
-    <subject-add-dialog :dialog="dialogs.add" :name="add.name" @added="handleAdded" />
-    <subject-edit-dialog :dialog="dialogs.edit" :item="edit.item" :index="edit.index" @edited="handleEdited"
-                         @deleted="handleDeleted" />
+    <add-dialog :dialog="dialogs.add" @added="handleAdded" />
+    <edit-dialog :dialog="dialogs.edit" :item="edit.item" :index="edit.index" @edited="handleEdited" @deleted="handleDeleted" />
   </div>
 </template>
 
 <script>
-import SubjectEditDialog from '../../components/admin/dialogs/SubjectEdit'
-import SubjectAddDialog from '../../components/admin/dialogs/SubjectAdd'
+import EditDialog from '../../components/subjects/dialogs/SubjectEdit'
+import AddDialog from '../../components/subjects/dialogs/SubjectAdd'
 import Loading from '../../components/subjects/Loading'
+import NoItems from '../../components/subjects/NoItems'
 import axios from 'axios'
 
 export default {
   components: {
-    SubjectAddDialog, SubjectEditDialog, Loading
+    AddDialog, EditDialog, Loading, NoItems
   },
   data () {
     return {
@@ -65,9 +60,6 @@ export default {
       edit: {
         item: {},
         index: -1
-      },
-      add: {
-        name: ''
       },
       dialogs: {
         add: false,
@@ -121,10 +113,6 @@ export default {
       this.edit.index = index
       this.dialogs.edit = !this.dialogs.edit
     },
-    addItem (name = '') {
-      this.add.name = name
-      this.dialogs.add = !this.dialogs.add
-    },
     handleAdded () {
       // TODO
     },
@@ -156,19 +144,6 @@ export default {
     &:hover {
       box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
     }
-  }
-}
-
-.no-items {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  padding: 20px 0;
-  > span {
-    margin-bottom: 20px;
-    font-weight: bold;
   }
 }
 
