@@ -1,5 +1,5 @@
 <template>
-  <el-container id="admin">
+  <el-container id="admin" :class="theme">
     <el-aside width="250px">
       <nav-menu />
     </el-aside>
@@ -18,9 +18,9 @@ export default {
   components: {
     NavMenu
   },
-  data () {
-    return {
-
+  computed: {
+    theme () {
+      return this.$store.state.template.theme
     }
   }
 }
@@ -31,5 +31,12 @@ export default {
   background: #fff;
   border-right: 1px solid #e6e6e6;
   min-height: calc(100vh - 64px); // 64px - Header
+}
+
+.dark {
+  > .el-aside {
+    background: #333;
+    border-right: 1px solid #484848;
+  }
 }
 </style>

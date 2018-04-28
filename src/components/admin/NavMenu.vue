@@ -1,5 +1,5 @@
 <template>
-  <el-menu :default-active="routeFullPath" router>
+  <el-menu :default-active="routeFullPath" :class="theme" router>
     <el-menu-item v-for="(item, index) in items" :key="index" :index="'/admin' + item.route">
       <i class="material-icons">{{ item.icon }}</i>
       <span>{{ item.name }}</span>
@@ -21,6 +21,9 @@ export default {
     }
   },
   computed: {
+    theme () {
+      return this.$store.state.template.theme
+    },
     routeFullPath () {
       return this.$route.fullPath
     }
@@ -38,5 +41,18 @@ export default {
   width: 24px;
   margin-right: 5px;
   text-align: center;
+}
+
+.dark {
+  .el-menu-item {
+    color: rgba(255, 255, 255, .87);
+    background: #333;
+    &:hover {
+      background: #222;
+    }
+    &.is-active {
+      color: #fff;
+    }
+  }
 }
 </style>
