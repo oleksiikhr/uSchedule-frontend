@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import AddDialog from './dialogs/SubjectAdd'
+import AddDialog from './dialogs/Add'
 
 export default {
   props: {

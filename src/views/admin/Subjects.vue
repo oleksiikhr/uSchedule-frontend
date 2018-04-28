@@ -2,13 +2,7 @@
   <div id="subjects" :class="'component admin ' + theme">
     <div class="header">
       <div class="search">
-        <el-input
-                placeholder="Поиск"
-                prefix-icon="el-icon-search"
-                v-model="search"
-                ref="search"
-                clearable
-        />
+        <el-input placeholder="Поиск" prefix-icon="el-icon-search" v-model="search" ref="search" clearable />
       </div>
       <div class="actions">
         <el-button @click="fetchGet()" icon="el-icon-refresh" :loading="loading" :disabled="loading" />
@@ -19,9 +13,7 @@
     <div class="items">
       <template v-if="!loading">
         <template v-if="filterItems.length">
-          <a class="item" v-for="(item, index) in filterItems" :key="index" @click="openItem(item, index)">
-            {{ item.name }}
-          </a>
+          <card v-for="(item, index) in filterItems" :key="index" :item="item" @open="openDialog(item, index)" />
         </template>
         <no-items :search="search" v-else />
       </template>
@@ -34,15 +26,16 @@
 </template>
 
 <script>
-import EditDialog from '../../components/subjects/dialogs/SubjectEdit'
-import AddDialog from '../../components/subjects/dialogs/SubjectAdd'
+import EditDialog from '../../components/subjects/dialogs/Edit'
+import AddDialog from '../../components/subjects/dialogs/Add'
 import Loading from '../../components/subjects/Loading'
 import NoItems from '../../components/subjects/NoItems'
+import Card from '../../components/subjects/Card'
 import axios from 'axios'
 
 export default {
   components: {
-    AddDialog, EditDialog, Loading, NoItems
+    AddDialog, EditDialog, Loading, NoItems, Card
   },
   data () {
     return {
@@ -108,7 +101,7 @@ export default {
           this.loading = false
         })
     },
-    openItem (obj, index) {
+    openDialog (obj, index) {
       this.edit.item = obj
       this.edit.index = index
       this.dialogs.edit = !this.dialogs.edit
@@ -134,17 +127,6 @@ export default {
   align-items: flex-start;
   background: #fff;
   border: 1px solid #e7e7e7;
-  > .item {
-    margin: 10px;
-    padding: 10px 20px;
-    color: rgba(0, 0, 0, .87);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    cursor: pointer;
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    &:hover {
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-    }
-  }
 }
 
 // TODO Dark theme
