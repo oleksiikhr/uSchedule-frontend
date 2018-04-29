@@ -36,6 +36,12 @@ export default {
       return this.$store.state.template.theme
     }
   },
+  created () {
+    const vm = this
+    setInterval(() => {
+      vm.$forceUpdate()
+    }, 1000)
+  },
   methods: {
     compareTime (index) {
       if (!this.schedule.time[index + 1]) {
