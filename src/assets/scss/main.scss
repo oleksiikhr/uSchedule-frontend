@@ -78,6 +78,7 @@ a {
 
 // Dark
 
+// TODO**
 .dark {
   a {
     color: #c59090;
@@ -85,6 +86,38 @@ a {
       color: #f16969;
     }
   }
+
+  // Form components
+  .el-button {
+    background: #444;
+    border-color: #444;
+    color: rgba(255, 255, 255, .8);
+    &:hover {
+      background: #555;
+    }
+    &.is-loading:before {
+      background-color: #333;
+    }
+  }
+  .el-input__inner {
+    background-color: #333;
+    border-color: #444;
+    color: rgba(255, 255, 255, .8);
+    &:focus {
+      border-color: #555;
+    }
+  }
+
+  // Pages
+  .component {
+    .items {
+      border-color: #484848;
+      background: #333;
+    }
+  }
+
+  // TODO Login form*
+  // FIXME el-form styles input to global
   &.el-form {
     .el-input__inner:focus {
       border-color: #333;
@@ -110,18 +143,13 @@ a {
     .el-checkbox__input.is-focus .el-checkbox__inner {
       border-color: #7b7b7b;
     }
-    .el-button {
-      background: #5a5a5a;
-      border-color: #333;
-      transition: .2s;
-      &:hover {
-        background: #222;
-      }
-    }
     .el-input__inner {
-      background: #696969;
-      border-color: #828282;
+      background-color: #444;
+      border-color: #555;
       color: rgba(255, 255, 255, .8);
+      &:focus {
+        border-color: #666;
+      }
     }
   }
 }

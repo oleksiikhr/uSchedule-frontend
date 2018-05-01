@@ -100,5 +100,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-// TODO Dark theme
+.dark {
+  .items {
+    border-color: #484848;
+    background: #333;
+  }
+}
 </style>
