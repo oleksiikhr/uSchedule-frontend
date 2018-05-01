@@ -3,15 +3,16 @@
     <div class="flex">
       <div class="content">
         <div class="left">
-          <!--TODO data from API-->
-          <span style="color: #fff;">LEFT</span>
+          <!--TODO data from API, loading, etc-->
+          <span class="title">Расписание</span>
         </div>
         <div class="middle">
-          <!--TODO data from API-->
-          <span style="color: #fff;">MIDDLE</span>
+          <!--TODO data from API, loading, etc-->
+          <span class="title">Преподаватели</span>
         </div>
         <div class="right">
           <!--TODO has access-->
+          <!--TODO Result no found (center)-->
           <div class="r-items" v-for="(item, i) in filterSections" :key="i" v-if="item.items.length > 0">
             <span class="title">{{ item.name }}</span>
             <div class="item" v-for="(sub, j) in item.items" :key="j">
@@ -106,7 +107,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 20px 20px 0;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     min-height: calc(100% - 20px);
   }
@@ -116,6 +117,7 @@ export default {
     flex-grow: 1;
     .left, .middle, .right {
       width: 100%;
+      padding: 0 20px;
     }
     .right {
       display: flex;
@@ -134,8 +136,6 @@ export default {
     display: block;
     padding-bottom: 20px;
     text-align: center;
-    color: rgba(255, 255, 255, .87);
-    font-weight: bold;
     font-size: 1.1rem;
     overflow: hidden;
     cursor: context-menu;
@@ -175,6 +175,11 @@ export default {
   }
 }
 
+.title {
+  color: rgba(255, 255, 255, .87);
+  font-weight: bold;
+}
+
 // Copyright
 .copyright {
   display: flex;
@@ -202,7 +207,21 @@ export default {
   }
 }
 
-// TODO Dark
 // Dark
 
+.dark {
+  .result {
+    background-color: rgba(43, 43, 43, .8);
+  }
+  .r-items {
+    .item > a {
+      background-color: rgba(255, 255, 255, .03);
+      border-color: #505050;
+      &:hover {
+        background-color: rgba(0, 0, 0, .3);
+        border-color: transparent;
+      }
+    }
+  }
+}
 </style>
