@@ -52,6 +52,12 @@ export default {
 }
 
 // Dark
-// TODO Dark theme
 
+.dark {
+  .admin-link > a {
+    background: #333;
+    border: 1px solid #444;
+    color: rgba(255, 255, 255, .8);
+  }
+}
 </style>

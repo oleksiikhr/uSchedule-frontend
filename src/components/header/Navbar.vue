@@ -133,10 +133,10 @@ export default {
       color: rgba(255, 255, 255, .5);
     }
     .h-btn {
-      color: rgba(255, 255, 255, .85);
-      background: #525252;
+      color: rgba(255, 255, 255, .8);
+      background: #444;
       &:hover {
-        background: #222;
+        background: #555;
       }
     }
     .h-btn-icon, .h-btn {
