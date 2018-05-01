@@ -34,5 +34,10 @@ export default {
   }
 }
 
-// TODO Dark theme
+.dark {
+  .item {
+    background-color: #444;
+    color: rgba(255, 255, 255, .87);
+  }
+}
 </style>

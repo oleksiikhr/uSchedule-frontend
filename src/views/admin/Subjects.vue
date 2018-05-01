@@ -40,7 +40,6 @@ export default {
   },
   data () {
     return {
-      // TODO Delete simple data
       items: [],
       search: '',
       loading: true,

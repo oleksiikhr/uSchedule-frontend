@@ -43,10 +43,12 @@ export default {
 }
 
 .dark {
-  background: #444;
-  color: rgba(255, 255, 255, .87);
-  &:hover {
-    color: #fff;
+  .subject {
+    background-color: #444;
+    color: rgba(255, 255, 255, .87);
+    &:hover {
+      color: #fff;
+    }
   }
 }
 </style>

@@ -49,7 +49,6 @@ export default {
   }
 }
 
-// TODO Dark theme
 .dark {
   span {
     color: rgba(255, 255, 255, .8);
