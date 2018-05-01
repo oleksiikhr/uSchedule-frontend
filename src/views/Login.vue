@@ -33,7 +33,11 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      form: {},
+      // FIXME Temporary. Delete
+      form: {
+        email: 'admin@uschedule.com',
+        password: 'admin123'
+      },
       loading: false
     }
   },

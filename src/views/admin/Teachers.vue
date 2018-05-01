@@ -17,16 +17,23 @@
     </div>
 
     <div class="items">
-      <!--TODO Card.vue - first_name, middle_name, last_name, academic_title, image, -->
+      <!--TODO No Items Component-->
+      <!--TODO Loading Component-->
+      <!--TODO Handle-->
+      <card v-for="(item, index) in items" :key="index" :item="item" />
     </div>
     <!-- TODO Edit (+delete), Add Dialogs*. Or Teacher.vue -->
   </div>
 </template>
 
 <script>
+import Card from '../../components/teachers/Card'
 import axios from 'axios'
 
 export default {
+  components: {
+    Card
+  },
   data () {
     return {
       items: [],
@@ -48,11 +55,11 @@ export default {
 
       axios.get('api/teachers')
         .then(res => {
-          // TODO
+          this.items = res.data.teachers.data
           this.loading = false
         })
         .catch(() => {
-          // TODO Show error message
+          this.$Message.warning('Ошибка сервера')
           this.loading = false
         })
     }
@@ -61,5 +68,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.items {
+  display: block !important;
+  text-align: center;
+}
+
 // TODO Dark theme
 </style>
