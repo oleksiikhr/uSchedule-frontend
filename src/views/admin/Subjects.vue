@@ -11,14 +11,14 @@
     </div>
 
     <div class="items">
-      <template v-if="!loading">
+      <template v-if="!loading || items.length">
         <template v-if="hasItems">
           <card v-for="(item, index) in items" :key="index" :item="item" @open="openDialog(item, index)" />
-          <!--TODO Button "+". Improved fetchGet (push array or new)-->
+          <a v-if="!loading && isNextPage" :class="'subject continue ' + theme" @click="fetchGet(true)">+</a>
         </template>
         <no-items :search="search" v-else />
       </template>
-      <loading v-else />
+      <loading v-if="loading" />
     </div>
 
     <add-dialog :dialog="dialogs.add" @added="handleAdded" />
@@ -43,6 +43,7 @@ export default {
       items: [],
       search: '',
       loading: true,
+      isNextPage: false,
       edit: {
         item: {},
         index: -1
@@ -66,13 +67,25 @@ export default {
     }
   },
   methods: {
-    fetchGet () {
+    fetchGet (isContinue = false) {
       this.loading = true
 
-      // TODO Params
+      if (!isContinue) {
+        this.items = []
+      }
+
+      // TODO Params (search, page, etc)
       axios.get('api/subjects')
         .then(res => {
-          // TODO response from the server
+          const s = res.data.subjects
+          if (s) {
+            if (isContinue) {
+              this.items.push(...s.data)
+            } else {
+              this.items = s.data
+            }
+            this.isNextPage = s.current_page < s.last_page
+          }
           this.loading = false
         })
         .catch(() => {
