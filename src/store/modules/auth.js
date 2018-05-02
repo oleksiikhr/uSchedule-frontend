@@ -29,9 +29,11 @@ const actions = {
 
         if (obj.remember) {
           localStorage.setItem('token', token)
+        } else {
+          localStorage.removeItem('token')
         }
-        localStorage.setItem('user', JSON.stringify(user))
 
+        localStorage.setItem('user', JSON.stringify(user))
         Message.success(`Добро пожаловать, ${user.last_name} ${user.first_name}`)
         router.push('/')
       })
