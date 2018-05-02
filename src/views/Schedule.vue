@@ -2,7 +2,7 @@
   <div id="schedule" :class="theme">
     <div class="header">
       <h1>Расписание звонков</h1>
-      <span class="current-time">{{ time }}</span>
+      <span v-if="schedule.show.time" class="current-time">{{ time }}</span>
     </div>
     <table>
       <thead>
@@ -45,7 +45,9 @@ export default {
     }
   },
   created () {
-    setInterval(() => { this.date = new Date() }, 1000)
+    if (schedule.show.time) {
+      setInterval(() => { this.date = new Date() }, 1000)
+    }
   },
   methods: {
     compareTime (index) {
@@ -106,7 +108,7 @@ export default {
 }
 
 .header {
-  margin-bottom: 20px;
+  margin-bottom: 5px;
   text-align: center;
   h1 {
     margin: 0;
@@ -116,6 +118,7 @@ export default {
     display: block;
     font-weight: bold;
     color: #333;
+    margin-bottom: 20px;
   }
 }
 

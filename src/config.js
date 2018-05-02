@@ -3,7 +3,8 @@ export const devUrlApi = 'http://uschedule.local'
 export const schedule = {
   show: {
     current: true,
-    rest: true
+    rest: true,
+    time: true
   },
   time: [
     { start: '8:20', end: '9:40' },
