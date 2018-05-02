@@ -28,8 +28,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
@@ -37,8 +35,7 @@ export default {
       form: {
         email: 'admin@uschedule.com',
         password: 'admin123'
-      },
-      loading: false
+      }
     }
   },
   mounted () {
@@ -51,19 +48,8 @@ export default {
   },
   methods: {
     fetchAuth () {
-      this.loading = true
-
-      axios.post('api/auth/login', this.form)
-        .then(res => {
-          // TODO If remember -> localStorage
-          console.log(res.data)
-          this.$router.push('/')
-        })
-        .catch(() => {
-          this.$message.error('Логин или пароль неверный.')
-          this.$refs.email.focus()
-          this.loading = false
-        })
+      this.$store.dispatch('authLogin', this.form)
+      this.$refs.email.focus()
     }
   }
 }
