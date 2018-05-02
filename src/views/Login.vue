@@ -87,7 +87,7 @@ a {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(57, 69, 90, 0.7);
+    background: rgba(57, 69, 90, .7);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
   }
@@ -130,10 +130,10 @@ a {
 
 .dark {
   .left::after {
-    background: rgba(21, 21, 21, 0.9);
+    background: rgba(21, 21, 21, .9);
   }
   .right {
-    background: #333;
+    background-color: #333;
     border-color: #333;
     h1 {
       color: #fff;

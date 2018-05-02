@@ -1,6 +1,9 @@
 <template>
   <div id="schedule" :class="theme">
-    <h1>Расписание звонков</h1>
+    <div class="header">
+      <h1>Расписание звонков</h1>
+      <span class="current-time">{{ time }}</span>
+    </div>
     <table>
       <thead>
       <tr>
@@ -28,19 +31,21 @@ import { schedule } from '../config'
 export default {
   data () {
     return {
-      schedule
+      schedule,
+      date: new Date()
     }
   },
   computed: {
     theme () {
       return this.$store.state.template.theme
+    },
+    time () {
+      return this.pad2(this.date.getHours()) + ':' + this.pad2(this.date.getMinutes()) + ':' +
+        this.pad2(this.date.getSeconds())
     }
   },
   created () {
-    const vm = this
-    setInterval(() => {
-      vm.$forceUpdate()
-    }, 1000)
+    setInterval(() => { this.date = new Date() }, 1000)
   },
   methods: {
     compareTime (index) {
@@ -81,6 +86,9 @@ export default {
           return 'current rest'
         }
       }
+    },
+    pad2 (number) {
+      return (number < 10 ? '0' : '') + number
     }
   }
 }
@@ -91,16 +99,24 @@ export default {
   max-width: 400px;
   margin: 20px auto;
   border: 1px solid #e7e7e7;
-  background: #fff;
+  background-color: #fff;
   padding: 40px 60px;
   cursor: context-menu;
   border-radius: 10px;
 }
 
-h1 {
+.header {
+  margin-bottom: 20px;
   text-align: center;
-  padding-bottom: 15px;
-  margin: 0 0 10px;
+  h1 {
+    margin: 0;
+    padding-bottom: 15px;
+  }
+  .current-time {
+    display: block;
+    font-weight: bold;
+    color: #333;
+  }
 }
 
 table {
@@ -123,7 +139,7 @@ thead {
 tbody {
   tr {
     &:nth-child(odd) {
-      background: #fbfbfb;
+      background-color: #fbfbfb;
     }
   }
   td:first-child {
@@ -160,11 +176,16 @@ td {
 .dark {
   color: rgba(255, 255, 255, .87);
   #schedule {
-    background: #333;
+    background-color: #333;
     border-color: #5f5f5f;
   }
-  h1 {
-    color: rgba(255, 255, 255, .87);
+  .header {
+    h1 {
+      color: rgba(255, 255, 255, .85);
+    }
+    .current-time {
+      color: rgba(255, 255, 255, .8);
+    }
   }
   thead {
     border-color: #a2a2a2
@@ -172,7 +193,7 @@ td {
   tbody {
     tr {
       &:nth-child(odd) {
-        background: #2f2f2f;
+        background-color: #2f2f2f;
       }
     }
   }
