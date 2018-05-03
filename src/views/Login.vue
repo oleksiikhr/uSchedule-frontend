@@ -19,7 +19,9 @@
             <el-checkbox v-model="form.remember">Запомнить пароль</el-checkbox>
           </el-form-item>
           <el-form-item class="text--right">
-            <el-button type="primary" @click="fetchAuth()">Войти</el-button>
+            <el-button type="primary" :disabled="loading" :loading="loading" @click="fetchAuth()">
+              Войти
+            </el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -44,6 +46,9 @@ export default {
   computed: {
     theme () {
       return this.$store.state.template.theme
+    },
+    loading () {
+      return this.$store.state.auth.loading
     }
   },
   methods: {
