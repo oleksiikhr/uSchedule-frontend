@@ -76,6 +76,15 @@ a {
   }
 }
 
+@keyframes loading {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
 // Dark
 .dark {
   a {
