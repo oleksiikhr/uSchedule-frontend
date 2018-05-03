@@ -42,6 +42,7 @@ export default {
     return {
       items: [],
       search: '',
+      page: 1,
       loading: true,
       isNextPage: false,
       edit: {
@@ -72,10 +73,15 @@ export default {
 
       if (!isContinue) {
         this.items = []
+        this.page = 1
       }
 
-      // TODO Params (search, page, etc)
-      axios.get('api/subjects')
+      axios.get('api/subjects', {
+        params: {
+          page: this.page++,
+          search: this.search
+        }
+      })
         .then(res => {
           const s = res.data.subjects
           if (s) {
@@ -106,6 +112,11 @@ export default {
     },
     handleDeleted () {
       // TODO
+    }
+  },
+  watch: {
+    search () {
+      this.fetchGet()
     }
   }
 }
