@@ -2,7 +2,6 @@
   <div :class="'toolbar ' + theme">
     <a @click="go('/')" class="logo">
       <!-- TODO LOGO (img, svg) -->
-      <!-- TODO Animate* on hover -->
       uSchedule
     </a>
     <search />
@@ -11,24 +10,18 @@
       <button @click="go('/schedule')" class="h-btn-icon btn">
         <i class="material-icons">schedule</i>
       </button>
-      <!-- TODO FIXME if auth (User panel) -->
-      <!-- TODO Component -->
-
-      <!-- TODO FIXME if auth (Notifications) + drop-down box* -->
-      <button v-if="false" @click="go('/')" class="h-btn-icon btn">
-        <i class="material-icons">notifications_none</i>
-      </button>
       <button @click="changeDarkTheme()" class="h-btn-icon btn">
         <i class="material-icons">opacity</i>
       </button>
-      <!-- TODO FIXME if not auth -->
-      <button @click="go('/login')" class="h-btn btn">
+      <!-- TODO To component. drop-down box -->
+      <button v-if="isAuth" @click="go('/')" class="h-btn-icon btn">
+        <i class="material-icons">notifications_none</i>
+      </button>
+      <!-- TODO FIXME if auth (User panel) -->
+      <!-- TODO Component -->
+      <button v-if="!isAuth" @click="go('/login')" class="h-btn btn">
         Авторизация
       </button>
-
-      <!-- TODO If auth - Admin panel (icon) -->
-      <!-- TODO If auth - User panel -->
-      <!-- TODO If not auth - Log In -->
     </div>
   </div>
 </template>
@@ -43,6 +36,12 @@ export default {
   computed: {
     theme () {
       return this.$store.state.template.theme
+    },
+    user () {
+      return this.$store.state.auth.user
+    },
+    isAuth () {
+      return this.user.id
     }
   },
   methods: {
