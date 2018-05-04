@@ -7,14 +7,18 @@
     <search />
 
     <div class="right">
-      <button @click="go('/schedule')" class="h-btn-icon btn">
-        <i class="material-icons">schedule</i>
-      </button>
-      <button @click="changeDarkTheme()" class="h-btn-icon btn">
-        <i class="material-icons">opacity</i>
-      </button>
-      <!-- TODO To component. drop-down box -->
-      <button v-if="isAuth" @click="go('/')" class="h-btn-icon btn">
+      <el-tooltip :effect="revertTheme" content="Расписание звонков" placement="bottom">
+        <button @click="go('/schedule')" class="h-btn-icon btn">
+          <i class="material-icons">schedule</i>
+        </button>
+      </el-tooltip>
+      <el-tooltip :effect="revertTheme" :content="darkTheme ? 'Light' : 'Dark'" placement="bottom">
+        <button @click="changeDarkTheme()" class="h-btn-icon btn">
+          <i class="material-icons">opacity</i>
+        </button>
+      </el-tooltip>
+      <!-- TODO Transfer a new component. drop-down box. Delete false -->
+      <button v-if="isAuth && false" @click="go('/')" class="h-btn-icon btn">
         <i class="material-icons">notifications_none</i>
       </button>
       <!-- TODO FIXME if auth (User panel) -->
@@ -36,6 +40,12 @@ export default {
   computed: {
     theme () {
       return this.$store.state.template.theme
+    },
+    darkTheme () {
+      return this.$store.state.template.darkTheme
+    },
+    revertTheme () {
+      return this.darkTheme ? 'light' : 'dark'
     },
     user () {
       return this.$store.state.auth.user
