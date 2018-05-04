@@ -73,6 +73,18 @@ a {
       background: #fff;
       border: 1px solid #e7e7e7;
     }
+    .no-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      padding: 20px 0;
+      > span {
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+    }
   }
 }
 
@@ -120,6 +132,11 @@ a {
     .items {
       border-color: #484848;
       background: #333;
+    }
+    .no-items {
+      span {
+        color: rgba(255, 255, 255, .8);
+      }
     }
   }
 

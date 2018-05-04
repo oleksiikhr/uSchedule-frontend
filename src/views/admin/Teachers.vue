@@ -32,12 +32,13 @@
 </template>
 
 <script>
+import NoItems from '../../components/teachers/NoItems'
 import Card from '../../components/teachers/Card'
 import axios from 'axios'
 
 export default {
   components: {
-    Card
+    Card, NoItems
   },
   data () {
     return {

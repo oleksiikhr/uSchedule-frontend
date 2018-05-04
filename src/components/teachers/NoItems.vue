@@ -1,6 +1,6 @@
 <template>
   <div :class="'no-items ' + theme">
-    <span>{{ search ? 'Предметы не найдены' : 'Предметы отсутствуют' }}</span>
+    <span>{{ search ? 'Преподаватели не найдены' : 'Преподаватели отсутствуют' }}</span>
     <el-button type="primary" @click="dialog = !dialog">
       {{ search ? 'Добавить с таким названием' : 'Добавить' }}
     </el-button>
