@@ -17,11 +17,16 @@
     </div>
 
     <div class="items">
-      <!--TODO No Items Component-->
-      <!--TODO Loading Component-->
-      <!--TODO Handle-->
-      <card v-for="(item, index) in items" :key="index" :item="item" />
+      <template v-if="!loading || items.length">
+        <template v-if="hasItems">
+          <card v-for="(item, index) in items" :key="index" :item="item" @open="openDialog(item, index)" />
+          <a v-if="!loading && isNextPage" :class="'teacher continue ' + theme" @click="fetchGet(true)">+</a>
+        </template>
+        <no-items :search="search" v-else />
+      </template>
+      <loading v-if="loading" />
     </div>
+
     <!-- TODO Edit (+delete), Add Dialogs*. Or Teacher.vue -->
   </div>
 </template>
@@ -38,30 +43,81 @@ export default {
     return {
       items: [],
       search: '',
-      loading: true
+      page: 1,
+      loading: true,
+      isNextPage: false,
+      edit: {
+        item: {},
+        index: -1
+      },
+      dialogs: {
+        add: false,
+        edit: false
+      }
     }
   },
   mounted () {
+    this.$refs.search.focus()
     this.fetchGet()
   },
   computed: {
     theme () {
       return this.$store.state.template.theme
+    },
+    hasItems () {
+      return this.items.length > 0
     }
   },
   methods: {
-    fetchGet () {
+    fetchGet (isContinue = false) {
       this.loading = true
 
-      axios.get('api/teachers')
+      if (!isContinue) {
+        this.items = []
+        this.page = 1
+      }
+
+      axios.get('api/teachers', {
+        params: {
+          page: this.page++,
+          search: this.search
+        }
+      })
         .then(res => {
-          this.items = res.data.teachers.data
+          const s = res.data.teachers
+          if (s) {
+            if (isContinue) {
+              this.items.push(...s.data)
+            } else {
+              this.items = s.data
+            }
+            this.isNextPage = s.current_page < s.last_page
+          }
           this.loading = false
         })
         .catch(() => {
-          this.$Message.warning('Ошибка сервера')
+          // TODO Show error message
           this.loading = false
         })
+    },
+    openDialog (obj, index) {
+      this.edit.item = obj
+      this.edit.index = index
+      this.dialogs.edit = !this.dialogs.edit
+    },
+    handleAdded () {
+      // TODO
+    },
+    handleEdited () {
+      // TODO
+    },
+    handleDeleted () {
+      // TODO
+    }
+  },
+  watch: {
+    search () {
+      this.fetchGet()
     }
   }
 }
@@ -69,8 +125,8 @@ export default {
 
 <style lang="scss" scoped>
 .items {
-  display: block !important;
   text-align: center;
+  justify-content: center;
 }
 
 // TODO Dark theme
