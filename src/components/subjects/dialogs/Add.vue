@@ -2,15 +2,15 @@
 @added | response from the server
 -->
 <template>
-  <el-dialog title="Добавить предмет" :visible.sync="inDialog" width="40%">
+  <el-dialog title="Добавить предмет" :visible.sync="inDialog" width="40%" :class="theme">
     <div>
       <span>Название:</span>
       <el-input placeholder="Название" v-model="form.name" />
     </div>
     <span slot="footer" class="dialog-footer">
-    <el-button @click="inDialog = false">Отмена</el-button>
-    <el-button type="primary" @click="fetchAdd()">Добавить</el-button>
-  </span>
+      <el-button @click="inDialog = false">Отмена</el-button>
+      <el-button type="primary" @click="fetchAdd()">Добавить</el-button>
+    </span>
   </el-dialog>
 </template>
 
@@ -33,6 +33,11 @@ export default {
       form: {},
       inDialog: false,
       loading: false
+    }
+  },
+  computed: {
+    theme () {
+      return this.$store.state.template.theme
     }
   },
   methods: {

@@ -88,6 +88,8 @@ a {
   }
 }
 
+
+
 @keyframes loading {
   0% {
     background-position: -468px 0;
@@ -108,14 +110,30 @@ a {
 
   // Form components
   .el-button {
-    background: #444;
+    background-color: #444;
     border-color: #444;
     color: rgba(255, 255, 255, .8);
     &:hover {
-      background: #555;
+      background-color: #555;
     }
     &.is-loading:before {
       background-color: #333;
+    }
+    &.el-button--primary {
+      background-color: #1b3b5d;
+      border-color: #1b3b5d;
+      &:hover {
+        background-color: #244d79;
+        border-color: #244d79;
+      }
+    }
+    &.el-button--danger {
+      background-color: #922525;
+      border-color: #922525;
+      &:hover {
+        background-color: #ad3030;
+        border-color: #ad3030;
+      }
     }
   }
   .el-input__inner {
@@ -175,5 +193,14 @@ a {
         border-color: #666;
       }
     }
+  }
+
+  // Dialogs
+  .el-dialog {
+    background-color: #222;
+    box-shadow: 0 1px 3px rgba(255, 255, 255, .2);
+  }
+  .el-dialog__title {
+    color: rgba(255, 255, 255, .87);
   }
 }
