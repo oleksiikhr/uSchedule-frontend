@@ -88,7 +88,36 @@ a {
   }
 }
 
+// Loading
+.process-loading {
+  position: relative;
+  cursor: context-menu;
+  &:after {
+    content: '';
+    box-sizing: border-box;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: loading;
+    animation-timing-function: linear;
+    position: absolute;
+    background: #f3f3f3;
+    background: linear-gradient(to right, #f3f3f3 8%, #fbfbfb 18%, #f9f9f9 33%);
+    background-size: 800px 100px;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+}
 
+.dark .process-loading {
+  &:after {
+    background: #4c4c4c;
+    background: linear-gradient(to right, #4c4c4c 8%, #424242 18%, #444 33%);
+    background-size: 800px 100px;
+  }
+}
 
 @keyframes loading {
   0% {
