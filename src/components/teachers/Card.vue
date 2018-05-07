@@ -33,7 +33,7 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 .teacher {
   display: inline-block;
   max-width: 180px;
@@ -43,6 +43,7 @@ export default {
   border: 1px solid #e7e7e7;
   margin: 10px;
   padding: 15px;
+  background-color: #fff;
   cursor: pointer;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   transition: all 0.3s cubic-bezier(.25,.8,.25,1);
