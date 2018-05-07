@@ -2,7 +2,7 @@
   <div :class="'no-items ' + theme">
     <span>{{ search ? 'Преподаватели не найдены' : 'Преподаватели отсутствуют' }}</span>
     <el-button type="primary" @click="dialog = !dialog">
-      {{ search ? 'Добавить с таким названием' : 'Добавить' }}
+      Добавить
     </el-button>
 
     <add-dialog :dialog="dialog" :name="search" />

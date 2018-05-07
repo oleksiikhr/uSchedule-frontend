@@ -14,7 +14,9 @@
       <template v-if="!loading || items.length">
         <template v-if="hasItems">
           <card v-for="(item, index) in items" :key="index" :item="item" @open="openDialog(item, index)" />
-          <a v-if="!loading && isNextPage" :class="'subject continue ' + theme" @click="fetchGet(true)">+</a>
+          <a v-if="!loading && isNextPage" :class="'subject continue ' + theme" @click="fetchGet(true)">
+            <i class="material-icons">autorenew</i>
+          </a>
         </template>
         <no-items :search="search" v-else />
       </template>
@@ -123,10 +125,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.subject {
+  &.continue  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 19px;
+    background: #0288d1;
+    color: #fff;
+    > i {
+      line-height: 0;
+      font-size: inherit;
+    }
+  }
+}
+
 .dark {
   .items {
     border-color: #484848;
     background: #333;
+  }
+  .subject {
+    &.continue {
+      background: #845252;
+      color: #fff;
+    }
   }
 }
 </style>

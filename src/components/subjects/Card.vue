@@ -40,10 +40,6 @@ export default {
   &:hover {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   }
-  &.continue {
-    background: #0288d1;
-    color: #fff;
-  }
 }
 
 .dark {
@@ -51,10 +47,6 @@ export default {
     background-color: #444;
     color: rgba(255, 255, 255, .87);
     &:hover {
-      color: #fff;
-    }
-    &.continue {
-      background: #845252;
       color: #fff;
     }
   }
