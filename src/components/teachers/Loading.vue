@@ -20,13 +20,11 @@ export default {
 
 <style lang="scss" scoped>
 .loading {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  width: 100%;
+  display: contents;
 }
 
 .teacher {
+  cursor: context-menu;
   &:hover {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
   }

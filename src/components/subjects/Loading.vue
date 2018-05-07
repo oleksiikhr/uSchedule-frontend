@@ -21,9 +21,7 @@ export default {
 
 <style lang="scss" scoped>
 .loading {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
+  display: contents;
 }
 
 .item {
