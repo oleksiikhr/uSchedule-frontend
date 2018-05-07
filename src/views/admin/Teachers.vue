@@ -20,7 +20,9 @@
       <template v-if="!loading || items.length">
         <template v-if="hasItems">
           <card v-for="(item, index) in items" :key="index" :item="item" @open="openDialog(item, index)" />
-          <a v-if="!loading && isNextPage" :class="'teacher continue ' + theme" @click="fetchGet(true)">+</a>
+          <a v-if="!loading && isNextPage" :class="'teacher continue ' + theme" @click="fetchGet(true)">
+            <i class="material-icons">autorenew</i>
+          </a>
         </template>
         <no-items :search="search" v-else />
       </template>
@@ -32,13 +34,14 @@
 </template>
 
 <script>
+import Loading from '../../components/teachers/Loading'
 import NoItems from '../../components/teachers/NoItems'
 import Card from '../../components/teachers/Card'
 import axios from 'axios'
 
 export default {
   components: {
-    Card, NoItems
+    Card, NoItems, Loading
   },
   data () {
     return {
@@ -128,6 +131,18 @@ export default {
 .items {
   text-align: center;
   justify-content: center;
+}
+
+.teacher {
+  &.continue {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    > i {
+      font-size: 2.5rem;
+      color: #333;
+    }
+  }
 }
 
 // TODO Dark theme
