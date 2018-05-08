@@ -12,7 +12,7 @@
       </div>
       <div class="actions">
         <el-button @click="fetchGet()" icon="el-icon-refresh" :loading="loading" :disabled="loading" />
-        <el-button>Добавить</el-button>
+        <el-button @click="dialogs.add = !dialogs.add">Добавить</el-button>
       </div>
     </div>
 
@@ -30,10 +30,12 @@
     </div>
 
     <!-- TODO Edit (+delete), Add Dialogs*. Or Teacher.vue -->
+    <add-dialog :dialog="dialogs.add" @added="handleAdded" />
   </div>
 </template>
 
 <script>
+import AddDialog from '../../components/teachers/dialogs/Add'
 import Loading from '../../components/teachers/Loading'
 import NoItems from '../../components/teachers/NoItems'
 import Card from '../../components/teachers/Card'
@@ -41,7 +43,7 @@ import axios from 'axios'
 
 export default {
   components: {
-    Card, NoItems, Loading
+    Card, NoItems, Loading, AddDialog
   },
   data () {
     return {

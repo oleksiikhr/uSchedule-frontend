@@ -82,7 +82,8 @@ export default {
         params: {
           page: this.page++,
           search: this.search,
-          order: { column: 'name', type: 'ASC' }
+          order: { column: 'name', type: 'ASC' },
+          count: 50
         }
       })
         .then(res => {
