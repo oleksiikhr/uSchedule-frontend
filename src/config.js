@@ -22,6 +22,7 @@ export const sections = {
   items: [
     {
       name: 'Аккаунт',
+      is_auth: true,
       items: [
         { name: 'Профиль', link: '/profile' },
         { name: 'Настройки', link: '/settings' },
@@ -38,6 +39,7 @@ export const sections = {
     },
     {
       name: 'Админка',
+      is_admin: true,
       items: [
         { name: 'Главная страница', link: '/admin' },
         { name: 'Настройки', link: '/admin/settings' },

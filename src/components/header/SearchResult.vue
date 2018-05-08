@@ -13,7 +13,7 @@
         <div class="right">
           <!--TODO has access-->
           <!--TODO Result no found (center)-->
-          <div class="r-items" v-for="(item, i) in filterSections" :key="i" v-if="item.items.length > 0">
+          <div class="r-items" v-for="(item, i) in filterSections" :key="i" v-if="canDisplaySection(item)">
             <span class="title">{{ item.name }}</span>
             <div class="item" v-for="(sub, j) in item.items" :key="j">
               <a v-if="sub.link" @click.prevent="go(sub.link)">{{ sub.name }}</a>
@@ -55,6 +55,9 @@ export default {
     theme () {
       return this.$store.state.template.theme
     },
+    user () {
+      return this.$store.state.auth.user
+    },
     filterSections () {
       let search = this.search
 
@@ -81,6 +84,16 @@ export default {
   methods: {
     changeFocus (bool) {
       this.$store.commit('SET_FOCUS_SEARCH', bool)
+    },
+    canDisplaySection (item) {
+      if (item.is_admin && !this.user.is_admin) {
+        return false
+      }
+      if (item.is_auth && !this.user.id) {
+        return false
+      }
+
+      return item.items.length >= 1
     },
     go (to) {
       this.changeFocus(false)
