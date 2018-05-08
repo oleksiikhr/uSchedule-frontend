@@ -5,7 +5,7 @@
       Добавить
     </el-button>
 
-    <add-dialog :dialog="dialog" :name="search" />
+    <add-dialog :dialog="dialog" />
   </div>
 </template>
 
