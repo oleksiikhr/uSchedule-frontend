@@ -36,7 +36,7 @@ export default {
 <style lang="scss">
 .teacher {
   display: inline-block;
-  max-width: 180px;
+  max-width: 140px;
   vertical-align: top;
   height: 180px;
   width: 100%;

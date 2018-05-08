@@ -81,7 +81,8 @@ export default {
       axios.get('api/subjects', {
         params: {
           page: this.page++,
-          search: this.search
+          search: this.search,
+          order: { column: 'name', type: 'ASC' }
         }
       })
         .then(res => {

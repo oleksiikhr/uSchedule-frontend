@@ -84,7 +84,12 @@ export default {
       axios.get('api/teachers', {
         params: {
           page: this.page++,
-          search: this.search
+          search: this.search,
+          order: [
+            { column: 'last_name', type: 'ASC' },
+            { column: 'first_name', type: 'ASC' },
+            { column: 'middle_name', type: 'ASC' }
+          ]
         }
       })
         .then(res => {
