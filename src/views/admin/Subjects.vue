@@ -78,7 +78,7 @@ export default {
         this.page = 1
       }
 
-      axios.get('api/subjects', {
+      axios.get('subjects', {
         params: {
           page: this.page++,
           search: this.search,

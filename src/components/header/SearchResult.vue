@@ -11,7 +11,6 @@
           <span class="title">Преподаватели</span>
         </div>
         <div class="right">
-          <!--TODO has access-->
           <!--TODO Result no found (center)-->
           <div class="r-items" v-for="(item, i) in filterSections" :key="i" v-if="canDisplaySection(item)">
             <span class="title">{{ item.name }}</span>

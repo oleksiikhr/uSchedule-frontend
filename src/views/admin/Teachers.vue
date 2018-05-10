@@ -83,7 +83,7 @@ export default {
         this.page = 1
       }
 
-      axios.get('api/teachers', {
+      axios.get('teachers', {
         params: {
           page: this.page++,
           search: this.search,
@@ -111,12 +111,13 @@ export default {
           this.loading = false
         })
     },
-    openDialog (obj, index) {
+    openDialog (obj, index = -1) {
       this.edit.item = obj
       this.edit.index = index
       this.dialogs.edit = !this.dialogs.edit
     },
-    handleAdded () {
+    handleAdded (response) {
+      this.openDialog(response.item)
       // TODO
     },
     handleEdited () {

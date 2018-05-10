@@ -50,7 +50,7 @@ export default {
     fetchAdd () {
       this.loading = true
 
-      axios.post('api/teachers', this.form)
+      axios.post('teachers', this.form)
         .then(res => {
           this.$emit('added', res.data)
           this.$message({ type: 'success', message: 'Добавлено' })

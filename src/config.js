@@ -1,4 +1,4 @@
-export const devUrlApi = 'http://uschedule.local'
+export const devUrlApi = 'http://uschedule.local/api'
 
 export const schedule = {
   show: {
@@ -17,7 +17,6 @@ export const schedule = {
   ]
 }
 
-// TODO setting (show or no)
 export const sections = {
   items: [
     {

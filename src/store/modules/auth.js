@@ -25,7 +25,7 @@ const actions = {
   authLogin ({commit}, obj) {
     commit('AUTH_SET_LOADING')
 
-    axios.post('api/auth/login', obj)
+    axios.post('auth/login', obj)
       .then(res => {
         const user = res.data.user
         const token = res.data.token
