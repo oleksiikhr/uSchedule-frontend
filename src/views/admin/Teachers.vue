@@ -65,8 +65,10 @@ export default {
       }
     }
   },
-  mounted () {
+  activated () {
     this.$refs.search.focus()
+  },
+  mounted () {
     this.fetchGet()
   },
   computed: {
