@@ -2,7 +2,7 @@
   <div :class="classSearch">
     <div class="input-group primary--text">
       <i class="material-icons">search</i>
-      <input placeholder="Поиск" v-model="input" @focus="changeFocus(true)">
+      <input placeholder="Поиск" v-model="input" ref="search" @focus="changeFocus(true)" @keydown.esc="clearInput()">
       <a v-if="input || focus" href="#" class="close" @click.prevent="clearInput()">
         <i class="material-icons">clear</i>
       </a>
@@ -36,8 +36,14 @@ export default {
       this.$store.commit('SET_FOCUS_SEARCH', bool)
     },
     clearInput () {
+      if (!this.focus) {
+        this.changeFocus(true)
+        this.$refs.search.focus()
+      } else {
+        this.changeFocus(false)
+        this.$refs.search.blur()
+      }
       this.input = ''
-      this.changeFocus(false)
     }
   }
 }
