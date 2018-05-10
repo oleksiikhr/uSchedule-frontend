@@ -19,6 +19,7 @@
     <div class="items">
       <template v-if="!loading || items.length">
         <template v-if="hasItems">
+          <!--FIXME @open - Show.vue-->
           <card v-for="(item, index) in items" :key="index" :item="item" @open="openDialog(item, index)" />
           <a v-if="!loading && isNextPage" :class="'teacher continue ' + theme" @click="fetchGet(true)">
             <i class="material-icons">autorenew</i>
@@ -29,12 +30,14 @@
       <loading v-if="loading" />
     </div>
 
-    <!-- TODO Edit (+delete), Add Dialogs*. Or Teacher.vue -->
+    <!--TODO show-dialog-->
     <add-dialog :dialog="dialogs.add" @added="handleAdded" />
+    <edit-dialog :dialog="dialogs.edit" :item="edit.item" :index="edit.index" @edited="handleEdited" @delete="handleDeleted" />
   </div>
 </template>
 
 <script>
+import EditDialog from '../../components/teachers/dialogs/Edit'
 import AddDialog from '../../components/teachers/dialogs/Add'
 import Loading from '../../components/teachers/Loading'
 import NoItems from '../../components/teachers/NoItems'
@@ -43,7 +46,7 @@ import axios from 'axios'
 
 export default {
   components: {
-    Card, NoItems, Loading, AddDialog
+    Card, NoItems, Loading, AddDialog, EditDialog
   },
   data () {
     return {
@@ -95,14 +98,14 @@ export default {
         }
       })
         .then(res => {
-          const s = res.data.teachers
-          if (s) {
+          const result = res.data.teachers
+          if (result) {
             if (isContinue) {
-              this.items.push(...s.data)
+              this.items.push(...result.data)
             } else {
-              this.items = s.data
+              this.items = result.data
             }
-            this.isNextPage = s.current_page < s.last_page
+            this.isNextPage = result.current_page < result.last_page
           }
           this.loading = false
         })
