@@ -11,14 +11,20 @@
           <span class="title">Преподаватели</span>
         </div>
         <div class="right">
-          <!--TODO Result no found (center)-->
-          <div class="r-items" v-for="(item, i) in filterSections" :key="i" v-if="canDisplaySection(item)">
-            <span class="title">{{ item.name }}</span>
-            <div class="item" v-for="(sub, j) in item.items" :key="j">
-              <a v-if="sub.link" @click.prevent="go(sub.link)">{{ sub.name }}</a>
-              <a v-else @click="href(sub.href)">{{ sub.name }}</a>
+          <template v-if="rightColumnHasData">
+            <div class="r-items" v-for="(item, i) in filterSections" :key="i" v-if="canDisplaySection(item)">
+              <span class="title">{{ item.name }}</span>
+              <div class="item" v-for="(sub, j) in item.items" :key="j">
+                <a v-if="sub.link" @click.prevent="go(sub.link)">{{ sub.name }}</a>
+                <a v-else @click="href(sub.href)">{{ sub.name }}</a>
+              </div>
             </div>
-          </div>
+          </template>
+          <template v-else>
+            <div class="no-items">
+              Данные не найдены
+            </div>
+          </template>
         </div>
       </div>
       <div class="copyright">
@@ -68,8 +74,7 @@ export default {
       search = search.toLocaleLowerCase().trim()
 
       for (let [i, item] of sections.items.entries()) {
-        res[i] = {}
-        res[i].name = item.name
+        res[i] = Object.assign({}, item)
         res[i].items = item.items.filter(section => {
           if (section.name.toLowerCase().indexOf(search) !== -1) {
             return section
@@ -78,6 +83,13 @@ export default {
       }
 
       return res
+    },
+    rightColumnHasData () {
+      return this.filterSections.some(s => {
+        if (s.items.length) {
+          return true
+        }
+      })
     }
   },
   methods: {
@@ -136,6 +148,15 @@ export default {
       flex-direction: column;
     }
   }
+}
+
+.no-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: rgba(255, 255, 255, .87);
 }
 
 // Right items
