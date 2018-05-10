@@ -32,7 +32,7 @@ export const sections = {
       name: 'Сайт',
       items: [
         { name: 'Главная страница', link: '/' },
-        { name: 'Авторизация', link: '/login' },
+        { name: 'Авторизация', link: '/login', is_auth: false },
         { name: 'Расписание звонков', link: '/schedule' }
       ]
     },

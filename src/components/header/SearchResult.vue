@@ -64,20 +64,16 @@ export default {
       return this.$store.state.auth.user
     },
     filterSections () {
-      let search = this.search
-
-      if (!search) {
-        return sections.items
-      }
-
+      let search = this.search.toLocaleLowerCase().trim()
       let res = []
-      search = search.toLocaleLowerCase().trim()
 
       for (let [i, item] of sections.items.entries()) {
         res[i] = Object.assign({}, item)
         res[i].items = item.items.filter(section => {
-          if (section.name.toLowerCase().indexOf(search) !== -1) {
-            return section
+          if (!search || (search && section.name.toLowerCase().indexOf(search) !== -1)) {
+            if (typeof section.is_auth === 'undefined' || (section.is_auth === !!this.user.id)) {
+              return section
+            }
           }
         })
       }
