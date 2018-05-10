@@ -32,7 +32,7 @@
 
     <!--TODO show-dialog-->
     <add-dialog :dialog="dialogs.add" @added="handleAdded" />
-    <edit-dialog :dialog="dialogs.edit" :item="edit.item" :index="edit.index" @edited="handleEdited" @delete="handleDeleted" />
+    <edit-dialog :dialog="dialogs.edit" :item="edit.item" :index="edit.index" @edited="handleEdited" @deleted="handleDeleted" />
   </div>
 </template>
 
@@ -123,11 +123,11 @@ export default {
       this.openDialog(response.item)
       // TODO
     },
-    handleEdited () {
-      // TODO
+    handleEdited (response, index) {
+      this.$set(this.items, index, response.item)
     },
-    handleDeleted () {
-      // TODO
+    handleDeleted (index) {
+      this.items.splice(index, 1)
     }
   },
   watch: {
