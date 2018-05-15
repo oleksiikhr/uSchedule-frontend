@@ -30,7 +30,6 @@
       <loading v-if="loading" />
     </div>
 
-    <!--TODO show-dialog-->
     <add-dialog :dialog="dialogs.add" @added="handleAdded" />
     <edit-dialog :dialog="dialogs.edit" :item="edit.item" :index="edit.index" @edited="handleEdited" @deleted="handleDeleted" />
   </div>

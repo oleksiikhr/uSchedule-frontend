@@ -2,7 +2,7 @@
 @added | response from the server
 -->
 <template>
-  <el-dialog title="Добавить предмет" :visible.sync="inDialog" width="40%" :class="theme">
+  <el-dialog title="Добавить предмет" :visible.sync="inDialog" :class="theme">
     <div>
       <span>Название:</span>
       <el-input placeholder="Название" v-model="form.name" />

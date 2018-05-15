@@ -2,7 +2,7 @@
 @added | response from the server
 -->
 <template>
-  <el-dialog title="Добавить преподавателя" :visible.sync="inDialog" width="40%" :class="theme">
+  <el-dialog title="Добавить преподавателя" :visible.sync="inDialog" :class="theme">
     <div>
       <p>
         <span>Имя:</span>

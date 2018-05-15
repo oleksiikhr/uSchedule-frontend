@@ -3,7 +3,7 @@
 @edited | response from the server | index
 -->
 <template>
-  <el-dialog :title="longName" :visible.sync="inDialog" width="40%">
+  <el-dialog :title="longName" :visible.sync="inDialog">
     <div>
       <!--TODO Image-->
       <p>

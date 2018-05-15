@@ -46,6 +46,17 @@ a {
 
 .el-dialog {
   text-align: left;
+  width: 100%;
+  max-width: 550px;
+}
+
+.drag-upload {
+  > .el-upload {
+    width: 100%;
+    > .el-upload-dragger {
+      width: 100%;
+    }
+  }
 }
 
 .el-form--label-top {

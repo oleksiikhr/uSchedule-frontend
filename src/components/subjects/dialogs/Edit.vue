@@ -3,7 +3,7 @@
 @edited | response from the server | index
 -->
 <template>
-  <el-dialog :title="item.name" :visible.sync="inDialog" width="40%">
+  <el-dialog :title="item.name" :visible.sync="inDialog">
     <div>
       <span>Новое название:</span>
       <el-input placeholder="Название" v-model="inItem.name" />
