@@ -3,22 +3,28 @@
     <div class="flex">
       <div class="content">
         <div class="left">
-          <!--TODO data from API-->
-          <span style="color: #fff;">LEFT</span>
+          <!--TODO data from API, loading, etc-->
+          <span class="title">Расписание</span>
         </div>
         <div class="middle">
-          <!--TODO data from API-->
-          <span style="color: #fff;">MIDDLE</span>
+          <!--TODO data from API, loading, etc-->
+          <span class="title">Преподаватели</span>
         </div>
         <div class="right">
-          <!--TODO has access-->
-          <div class="r-items" v-for="(item, i) in filterSections" :key="i" v-if="item.items.length > 0">
-            <span class="title">{{ item.name }}</span>
-            <div class="item" v-for="(sub, j) in item.items" :key="j">
-              <a v-if="sub.link" @click.prevent="go(sub.link)">{{ sub.name }}</a>
-              <a v-else @click="href(sub.href)">{{ sub.name }}</a>
+          <template v-if="rightColumnHasData">
+            <div class="r-items" v-for="(item, i) in filterSections" :key="i" v-if="canDisplaySection(item)">
+              <span class="title">{{ item.name }}</span>
+              <div class="item" v-for="(sub, j) in item.items" :key="j">
+                <a v-if="sub.link" @click.prevent="go(sub.link)">{{ sub.name }}</a>
+                <a v-else @click="href(sub.href)">{{ sub.name }}</a>
+              </div>
             </div>
-          </div>
+          </template>
+          <template v-else>
+            <div class="no-items">
+              Данные не найдены
+            </div>
+          </template>
         </div>
       </div>
       <div class="copyright">
@@ -54,32 +60,47 @@ export default {
     theme () {
       return this.$store.state.template.theme
     },
+    user () {
+      return this.$store.state.auth.user
+    },
     filterSections () {
-      let search = this.search
-
-      if (!search) {
-        return sections.items
-      }
-
+      let search = this.search.toLocaleLowerCase().trim()
       let res = []
-      search = search.toLocaleLowerCase().trim()
 
       for (let [i, item] of sections.items.entries()) {
-        res[i] = {}
-        res[i].name = item.name
+        res[i] = Object.assign({}, item)
         res[i].items = item.items.filter(section => {
-          if (section.name.toLowerCase().indexOf(search) !== -1) {
-            return section
+          if (!search || (search && section.name.toLowerCase().indexOf(search) !== -1)) {
+            if (typeof section.is_auth === 'undefined' || (section.is_auth === !!this.user.id)) {
+              return section
+            }
           }
         })
       }
 
       return res
+    },
+    rightColumnHasData () {
+      return this.filterSections.some(s => {
+        if (s.items.length) {
+          return true
+        }
+      })
     }
   },
   methods: {
     changeFocus (bool) {
       this.$store.commit('SET_FOCUS_SEARCH', bool)
+    },
+    canDisplaySection (item) {
+      if (item.is_admin && !this.user.is_admin) {
+        return false
+      }
+      if (item.is_auth && !this.user.id) {
+        return false
+      }
+
+      return item.items.length >= 1
     },
     go (to) {
       this.changeFocus(false)
@@ -106,7 +127,7 @@ export default {
     display: flex;
     flex-direction: column;
     padding: 20px 20px 0;
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     min-height: calc(100% - 20px);
   }
@@ -116,12 +137,22 @@ export default {
     flex-grow: 1;
     .left, .middle, .right {
       width: 100%;
+      padding: 0 20px;
     }
     .right {
       display: flex;
       flex-direction: column;
     }
   }
+}
+
+.no-items {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+  color: rgba(255, 255, 255, .87);
 }
 
 // Right items
@@ -134,8 +165,6 @@ export default {
     display: block;
     padding-bottom: 20px;
     text-align: center;
-    color: rgba(255, 255, 255, .87);
-    font-weight: bold;
     font-size: 1.1rem;
     overflow: hidden;
     cursor: context-menu;
@@ -175,6 +204,11 @@ export default {
   }
 }
 
+.title {
+  color: rgba(255, 255, 255, .87);
+  font-weight: bold;
+}
+
 // Copyright
 .copyright {
   display: flex;
@@ -202,7 +236,21 @@ export default {
   }
 }
 
-// TODO Dark
 // Dark
 
+.dark {
+  .result {
+    background-color: rgba(43, 43, 43, .8);
+  }
+  .r-items {
+    .item > a {
+      background-color: rgba(255, 255, 255, .03);
+      border-color: #505050;
+      &:hover {
+        background-color: rgba(0, 0, 0, .3);
+        border-color: transparent;
+      }
+    }
+  }
+}
 </style>

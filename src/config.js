@@ -1,7 +1,10 @@
+export const devUrlApi = 'http://uschedule.local/api'
+
 export const schedule = {
   show: {
     current: true,
-    rest: true
+    rest: true,
+    time: true
   },
   time: [
     { start: '8:20', end: '9:40' },
@@ -14,26 +17,28 @@ export const schedule = {
   ]
 }
 
-// TODO setting (show or no)
 export const sections = {
   items: [
     {
       name: 'Аккаунт',
+      is_auth: true,
       items: [
         { name: 'Профиль', link: '/profile' },
-        { name: 'Настройки', link: '/settings' }
+        { name: 'Настройки', link: '/settings' },
+        { name: 'Уведомления', link: '/notifications' }
       ]
     },
     {
       name: 'Сайт',
       items: [
         { name: 'Главная страница', link: '/' },
-        { name: 'Авторизация', link: '/login' },
+        { name: 'Авторизация', link: '/login', is_auth: false },
         { name: 'Расписание звонков', link: '/schedule' }
       ]
     },
     {
       name: 'Админка',
+      is_admin: true,
       items: [
         { name: 'Главная страница', link: '/admin' },
         { name: 'Настройки', link: '/admin/settings' },

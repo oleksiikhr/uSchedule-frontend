@@ -2,33 +2,30 @@
   <div :class="'toolbar ' + theme">
     <a @click="go('/')" class="logo">
       <!-- TODO LOGO (img, svg) -->
-      <!-- TODO Animate* on hover -->
       uSchedule
     </a>
     <search />
 
     <div class="right">
-      <button @click="go('/schedule')" class="h-btn-icon btn">
-        <i class="material-icons">schedule</i>
+      <el-tooltip :effect="revertTheme" content="Расписание звонков" placement="bottom">
+        <button @click="go('/schedule')" class="h-btn-icon btn">
+          <i class="material-icons">schedule</i>
+        </button>
+      </el-tooltip>
+      <el-tooltip :effect="revertTheme" :content="darkTheme ? 'Light' : 'Dark'" placement="bottom">
+        <button @click="changeDarkTheme()" class="h-btn-icon btn">
+          <i class="material-icons">opacity</i>
+        </button>
+      </el-tooltip>
+      <!-- TODO Transfer a new component. drop-down box. Delete false -->
+      <button v-if="isAuth && false" @click="go('/')" class="h-btn-icon btn">
+        <i class="material-icons">notifications_none</i>
       </button>
       <!-- TODO FIXME if auth (User panel) -->
       <!-- TODO Component -->
-
-      <!-- TODO FIXME if auth (Notifications) + drop-down box* -->
-      <button @click="go('/')" class="h-btn-icon btn">
-        <i class="material-icons">notifications_none</i>
-      </button>
-      <button @click="changeDarkTheme()" class="h-btn-icon btn">
-        <i class="material-icons">opacity</i>
-      </button>
-      <!-- TODO FIXME if not auth -->
-      <button @click="go('/login')" class="h-btn btn">
+      <button v-if="!isAuth" @click="go('/login')" class="h-btn btn">
         Авторизация
       </button>
-
-      <!-- TODO If auth - Admin panel (icon) -->
-      <!-- TODO If auth - User panel -->
-      <!-- TODO If not auth - Log In -->
     </div>
   </div>
 </template>
@@ -43,6 +40,18 @@ export default {
   computed: {
     theme () {
       return this.$store.state.template.theme
+    },
+    darkTheme () {
+      return this.$store.state.template.darkTheme
+    },
+    revertTheme () {
+      return this.darkTheme ? 'light' : 'dark'
+    },
+    user () {
+      return this.$store.state.auth.user
+    },
+    isAuth () {
+      return this.user.id
     }
   },
   methods: {
@@ -133,10 +142,10 @@ export default {
       color: rgba(255, 255, 255, .5);
     }
     .h-btn {
-      color: rgba(255, 255, 255, .85);
-      background: #525252;
+      color: rgba(255, 255, 255, .8);
+      background: #444;
       &:hover {
-        background: #222;
+        background: #555;
       }
     }
     .h-btn-icon, .h-btn {

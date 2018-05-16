@@ -1,103 +1,114 @@
 <template>
-  <!--FIXME Max Width*-->
-  <div id="subjects">
+  <div id="subjects" :class="'component admin ' + theme">
     <div class="header">
       <div class="search">
-        <el-input
-                placeholder="Поиск предмета"
-                prefix-icon="el-icon-search"
-                v-model="search"
-                ref="search"
-                clearable
-        />
+        <el-input placeholder="Поиск" prefix-icon="el-icon-search" v-model="search" ref="search" clearable />
       </div>
       <div class="actions">
-        <el-button @click="addItem()">Добавить</el-button>
+        <el-button @click="fetchGet()" icon="el-icon-refresh" :loading="loading" :disabled="loading" />
+        <el-button @click="dialogs.add = !dialogs.add">Добавить</el-button>
       </div>
     </div>
 
-    <div class="items" v-loading="loading">
-      <template v-if="filterItems.length">
-        <a class="item" v-for="item in filterItems" :key="item.id" @click="openItem(item)">
-          {{ item.name }}
-        </a>
+    <div class="items">
+      <template v-if="!loading || items.length">
+        <template v-if="hasItems">
+          <card v-for="(item, index) in items" :key="index" :item="item" @open="openDialog(item, index)" />
+          <a v-if="!loading && isNextPage" :class="'subject continue ' + theme" @click="fetchGet(true)">
+            <i class="material-icons">autorenew</i>
+          </a>
+        </template>
+        <no-items :search="search" v-else />
       </template>
-      <div class="no-items" v-else>
-        <span>Предметы не найдены</span>
-        <el-button v-if="search" type="primary" @click="addItem(search)">
-          Добавить с таким названием
-        </el-button>
-      </div>
+      <loading v-if="loading" />
     </div>
 
-    <subject-add-dialog :dialog="dialogs.add" :name="name" @added="handleAdded" />
-    <subject-edit-dialog :dialog="dialogs.edit" :item="item" @edited="handleEdited" @deleted="handleDeleted" />
+    <add-dialog :dialog="dialogs.add" @added="handleAdded" />
+    <edit-dialog :dialog="dialogs.edit" :item="edit.item" :index="edit.index" @edited="handleEdited" @deleted="handleDeleted" />
   </div>
 </template>
 
 <script>
-import SubjectEditDialog from '../../components/admin/dialogs/SubjectEdit'
-import SubjectAddDialog from '../../components/admin/dialogs/SubjectAdd'
+import EditDialog from '../../components/subjects/dialogs/Edit'
+import AddDialog from '../../components/subjects/dialogs/Add'
+import Loading from '../../components/subjects/Loading'
+import NoItems from '../../components/subjects/NoItems'
+import Card from '../../components/subjects/Card'
+import axios from 'axios'
 
 export default {
   components: {
-    SubjectAddDialog, SubjectEditDialog
+    AddDialog, EditDialog, Loading, NoItems, Card
   },
   data () {
     return {
-      // TODO Delete simple data
-      items: [
-        { id: 1, name: 'Информатика' },
-        { id: 2, name: 'Биология' },
-        { id: 3, name: 'Физика' },
-        { id: 5, name: 'Математика' },
-        { id: 6, name: 'ООП' },
-        { id: 7, name: 'Химия' }
-      ],
-      item: {},
-      name: '',
+      items: [],
       search: '',
-      // TODO change to true
-      loading: false,
+      page: 1,
+      loading: true,
+      isNextPage: false,
+      edit: {
+        item: {},
+        index: -1
+      },
       dialogs: {
         add: false,
         edit: false
       }
     }
   },
-  mounted () {
+  activated () {
     this.$refs.search.focus()
   },
+  mounted () {
+    this.fetchGet()
+  },
   computed: {
-    filterItems () {
-      // FIXME Search backend**
-      let search = this.search
-      let items = this.items
-
-      if (!search) {
-        return items
-      }
-
-      search = search.toLocaleLowerCase().trim()
-
-      items = items.filter(subject => {
-        if (subject.name.toLowerCase().indexOf(search) !== -1) {
-          return subject
-        }
-      })
-
-      return items
+    theme () {
+      return this.$store.state.template.theme
+    },
+    hasItems () {
+      return this.items.length > 0
     }
   },
   methods: {
-    // TODO FetchGet
-    openItem (obj) {
-      this.item = obj
-      this.dialogs.edit = !this.dialogs.edit
+    fetchGet (isContinue = false) {
+      this.loading = true
+
+      if (!isContinue) {
+        this.items = []
+        this.page = 1
+      }
+
+      axios.get('subjects', {
+        params: {
+          page: this.page++,
+          search: this.search,
+          order: { column: 'name', type: 'ASC' },
+          count: 50
+        }
+      })
+        .then(res => {
+          const s = res.data.subjects
+          if (s) {
+            if (isContinue) {
+              this.items.push(...s.data)
+            } else {
+              this.items = s.data
+            }
+            this.isNextPage = s.current_page < s.last_page
+          }
+          this.loading = false
+        })
+        .catch(() => {
+          // TODO Show error message
+          this.loading = false
+        })
     },
-    addItem (name = '') {
-      this.name = name
-      this.dialogs.add = !this.dialogs.add
+    openDialog (obj, index) {
+      this.edit.item = obj
+      this.edit.index = index
+      this.dialogs.edit = !this.dialogs.edit
     },
     handleAdded () {
       // TODO
@@ -108,56 +119,41 @@ export default {
     handleDeleted () {
       // TODO
     }
+  },
+  watch: {
+    search () {
+      this.fetchGet()
+    }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.header {
-  display: flex;
-  justify-items: center;
-  align-items: center;
-  max-width: 600px;
-  margin: 0 auto 20px;
-}
-
-.search {
-  flex-grow: 1;
-  margin-right: 20px;
-}
-
-.items {
-  display: flex;
-  flex-wrap: wrap;
-  padding: 10px 20px;
-  align-items: flex-start;
-  min-height: 100px;
-  background: #fff;
-  border: 1px solid #e7e7e7;
-  > .item {
-    cursor: pointer;
-    padding: 10px 20px;
-    margin: 10px;
-    color: rgba(0, 0, 0, .87);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-    transition: all 0.3s cubic-bezier(.25,.8,.25,1);
-    &:hover {
-      box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+.subject {
+  &.continue  {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 19px;
+    background: #0288d1;
+    color: #fff;
+    > i {
+      line-height: 0;
+      font-size: inherit;
     }
   }
 }
 
-.no-items {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-direction: column;
-  width: 100%;
-  padding: 20px 0;
-  > span {
-    margin-bottom: 20px;
-    font-weight: bold;
+.dark {
+  .items {
+    border-color: #484848;
+    background: #333;
+  }
+  .subject {
+    &.continue {
+      background: #845252;
+      color: #fff;
+    }
   }
 }
-
 </style>

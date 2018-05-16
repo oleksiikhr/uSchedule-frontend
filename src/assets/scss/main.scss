@@ -40,14 +40,118 @@ a {
   text-align: right;
 }
 
+.bottom10 {
+  margin-bottom: 10px;
+}
+
+.el-dialog {
+  text-align: left;
+  width: 100%;
+  max-width: 550px;
+}
+
+.drag-upload {
+  > .el-upload {
+    width: 100%;
+    > .el-upload-dragger {
+      width: 100%;
+    }
+  }
+}
+
 .el-form--label-top {
   .el-form-item__label {
     line-height: normal;
   }
 }
 
-// Dark
+.component {
+  max-width: 1200px;
+  margin: 0 auto;
+  &.admin {
+    .header {
+      display: flex;
+      justify-items: center;
+      align-items: center;
+      max-width: 600px;
+      margin: 0 auto 20px;
+    }
+    .search {
+      flex-grow: 1;
+      margin-right: 20px;
+    }
+    .items {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 10px 20px;
+      align-items: flex-start;
+      background: #fff;
+      border: 1px solid #e7e7e7;
+    }
+    .no-items {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      padding: 20px 0;
+      > span {
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+    }
+  }
+}
 
+// Loading
+.process-loading {
+  position: relative;
+  cursor: context-menu;
+  &:after {
+    content: '';
+    box-sizing: border-box;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: infinite;
+    animation-name: loading;
+    animation-timing-function: linear;
+    position: absolute;
+    background: #f3f3f3;
+    background: linear-gradient(to right, #f3f3f3 8%, #fbfbfb 18%, #f9f9f9 33%);
+    background-size: 800px 100px;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+  }
+}
+
+.dark .process-loading {
+  &:after {
+    background: #4c4c4c;
+    background: linear-gradient(to right, #4c4c4c 8%, #424242 18%, #444 33%);
+    background-size: 800px 100px;
+  }
+}
+
+.dark .process-loading__harder {
+  &:after {
+    background: #545454;
+    background: linear-gradient(to right, #565656 8%, #4c4c4c 18%, #545454 33%);
+    background-size: 800px 100px;
+  }
+}
+
+@keyframes loading {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+// Dark
 .dark {
   a {
     color: #c59090;
@@ -55,6 +159,59 @@ a {
       color: #f16969;
     }
   }
+
+  // Form components
+  .el-button {
+    background-color: #444;
+    border-color: #444;
+    color: rgba(255, 255, 255, .8);
+    &:hover {
+      background-color: #555;
+    }
+    &.is-loading:before {
+      background-color: #333;
+    }
+    &.el-button--primary {
+      background-color: #1e4977;
+      border-color: #1e4977;
+      &:hover {
+        background-color: #244d79;
+        border-color: #244d79;
+      }
+    }
+    &.el-button--danger {
+      background-color: #922525;
+      border-color: #922525;
+      &:hover {
+        background-color: #ad3030;
+        border-color: #ad3030;
+      }
+    }
+  }
+  .el-input__inner {
+    background-color: #444;
+    border-color: #555;
+    color: rgba(255, 255, 255, .8);
+    &:focus {
+      border-color: #555;
+    }
+  }
+
+  // Pages
+  .component {
+    .items {
+      border-color: #484848;
+      background: #333;
+    }
+    .no-items {
+      span {
+        color: rgba(255, 255, 255, .8);
+      }
+    }
+  }
+
+  // TODO Login form*
+  // FIXME el-form styles input to global
   &.el-form {
     .el-input__inner:focus {
       border-color: #333;
@@ -80,18 +237,22 @@ a {
     .el-checkbox__input.is-focus .el-checkbox__inner {
       border-color: #7b7b7b;
     }
-    .el-button {
-      background: #5a5a5a;
-      border-color: #333;
-      transition: .2s;
-      &:hover {
-        background: #222;
+    .el-input__inner {
+      background-color: #444;
+      border-color: #555;
+      color: rgba(255, 255, 255, .8);
+      &:focus {
+        border-color: #666;
       }
     }
-    .el-input__inner {
-      background: #696969;
-      border-color: #828282;
-      color: rgba(255, 255, 255, .8);
-    }
+  }
+
+  // Dialogs
+  .el-dialog {
+    background-color: #333;
+    box-shadow: 0 1px 3px rgba(255, 255, 255, .2);
+  }
+  .el-dialog__title {
+    color: rgba(255, 255, 255, .87);
   }
 }

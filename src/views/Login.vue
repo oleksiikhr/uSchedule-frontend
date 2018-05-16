@@ -9,17 +9,19 @@
         <h1>Авторизация</h1>
         <small>Забыли пароль? <router-link to="/restore">Восстановить аккаунт.</router-link></small>
         <el-form label-position="top" :model="form" :class="theme">
-          <el-form-item label="Логин">
-            <el-input v-model="form.login" ref="login" />
+          <el-form-item label="Email">
+            <el-input type="email" v-model="form.email" ref="email" />
           </el-form-item>
           <el-form-item label="Пароль" class="bottom10">
-            <el-input v-model="form.password" />
+            <el-input type="password" v-model="form.password" />
           </el-form-item>
           <el-form-item class="bottom10">
             <el-checkbox v-model="form.remember">Запомнить пароль</el-checkbox>
           </el-form-item>
           <el-form-item class="text--right">
-            <el-button type="primary" @click="fetchAuth()">Войти</el-button>
+            <el-button type="primary" :disabled="loading" :loading="loading" @click="fetchAuth()">
+              Войти
+            </el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -28,38 +30,31 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
-      form: {},
-      loading: false
+      // FIXME Temporary. Delete
+      form: {
+        email: 'admin@uschedule.com',
+        password: 'admin123'
+      }
     }
   },
   mounted () {
-    this.$nextTick(() => this.$refs.login.focus())
+    this.$nextTick(() => this.$refs.email.focus())
   },
   computed: {
     theme () {
       return this.$store.state.template.theme
+    },
+    loading () {
+      return this.$store.state.auth.loading
     }
   },
   methods: {
     fetchAuth () {
-      this.loading = true
-      // TODO URL Auth
-      axios.post('', this.form)
-        .then(res => {
-          console.log(res.data)
-          this.form = {}
-          this.loading = false
-        })
-        .catch(err => {
-          console.log(err.response.data)
-          this.$refs.login.focus()
-          this.loading = false
-        })
+      this.$store.dispatch('authLogin', this.form)
+      this.$refs.email.focus()
     }
   }
 }
@@ -73,7 +68,7 @@ a {
 #login-page {
   display: flex;
   max-width: 800px;
-  margin: 20px auto 0;
+  margin: 20px auto;
 }
 
 .left, .right {
@@ -97,7 +92,7 @@ a {
     top: 0;
     width: 100%;
     height: 100%;
-    background: rgba(57, 69, 90, 0.7);
+    background: rgba(57, 69, 90, .7);
     border-top-left-radius: 10px;
     border-bottom-left-radius: 10px;
   }
@@ -136,18 +131,14 @@ a {
   }
 }
 
-.bottom10 {
-  margin-bottom: 10px;
-}
-
 // Dark
 
 .dark {
   .left::after {
-    background: rgba(21, 21, 21, 0.9);
+    background: rgba(21, 21, 21, .9);
   }
   .right {
-    background: #333;
+    background-color: #333;
     border-color: #333;
     h1 {
       color: #fff;
