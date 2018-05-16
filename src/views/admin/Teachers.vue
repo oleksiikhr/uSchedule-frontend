@@ -157,5 +157,11 @@ export default {
   }
 }
 
-// TODO Dark theme
+.dark {
+  &.teacher.continue {
+    > i {
+      color: rgba(255, 255, 255, .87);
+    }
+  }
+}
 </style>

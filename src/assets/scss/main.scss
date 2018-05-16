@@ -134,6 +134,14 @@ a {
   }
 }
 
+.dark .process-loading__harder {
+  &:after {
+    background: #545454;
+    background: linear-gradient(to right, #565656 8%, #4c4c4c 18%, #545454 33%);
+    background-size: 800px 100px;
+  }
+}
+
 @keyframes loading {
   0% {
     background-position: -468px 0;

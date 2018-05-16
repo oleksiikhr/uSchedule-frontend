@@ -73,5 +73,13 @@ export default {
   }
 }
 
-// TODO Dark theme
+.dark {
+  &.teacher {
+    background-color: #444;
+    border-color: #555;
+  }
+  p {
+    color: rgba(255, 255, 255, .87);
+  }
+}
 </style>

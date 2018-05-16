@@ -1,9 +1,9 @@
 <template>
-  <div :class="'loading ' + theme">
-    <div class="teacher" v-for="n in 8" :key="n">
-      <div class="img process-loading"></div>
-      <div class="name process-loading"></div>
-      <div class="academic process-loading"></div>
+  <div class="loading">
+    <div :class="'teacher ' + theme" v-for="n in 8" :key="n">
+      <div class="img process-loading process-loading__harder"></div>
+      <div class="name process-loading process-loading__harder"></div>
+      <div class="academic process-loading process-loading__harder"></div>
     </div>
   </div>
 </template>
