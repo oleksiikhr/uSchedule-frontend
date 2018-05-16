@@ -77,9 +77,9 @@ export default {
   &.teacher {
     background-color: #444;
     border-color: #555;
-  }
-  p {
-    color: rgba(255, 255, 255, .87);
+    p {
+      color: rgba(255, 255, 255, .82);
+    }
   }
 }
 </style>

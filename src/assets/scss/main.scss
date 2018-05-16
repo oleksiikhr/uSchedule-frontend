@@ -172,8 +172,8 @@ a {
       background-color: #333;
     }
     &.el-button--primary {
-      background-color: #1b3b5d;
-      border-color: #1b3b5d;
+      background-color: #1e4977;
+      border-color: #1e4977;
       &:hover {
         background-color: #244d79;
         border-color: #244d79;
@@ -189,8 +189,8 @@ a {
     }
   }
   .el-input__inner {
-    background-color: #333;
-    border-color: #444;
+    background-color: #444;
+    border-color: #555;
     color: rgba(255, 255, 255, .8);
     &:focus {
       border-color: #555;
@@ -249,7 +249,7 @@ a {
 
   // Dialogs
   .el-dialog {
-    background-color: #222;
+    background-color: #333;
     box-shadow: 0 1px 3px rgba(255, 255, 255, .2);
   }
   .el-dialog__title {
