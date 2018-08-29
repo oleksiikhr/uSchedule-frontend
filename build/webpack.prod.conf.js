@@ -12,6 +12,7 @@ const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 const WebpackPwaManifest = require('webpack-pwa-manifest')
+const CleanWebpackPlugin = require('clean-webpack-plugin')
 const packageJson = require('../package')
 
 const env = require('../config/prod.env')
@@ -74,6 +75,9 @@ const webpackConfig = merge(baseWebpackConfig, {
         ignore: ['.*']
       }
     ]),
+    new CleanWebpackPlugin(['dist'], {
+      root: path.resolve(__dirname , '..')
+    }),
     new SWPrecacheWebpackPlugin({
       cacheId: packageJson.name,
       dontCacheBustUrlsMatching: /\.\w{8}\./,
