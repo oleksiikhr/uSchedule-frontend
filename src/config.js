@@ -1,0 +1,21 @@
+/**
+ * Call time, with settings for the "schedule" page.
+ *
+ * @type {{show: {current: boolean, rest: boolean, time: boolean}, time: *[]}}
+ */
+export const schedule = {
+  show: {
+    current: true,
+    rest: true,
+    time: true
+  },
+  time: [
+    { start: '8:20', end: '9:40' },
+    { start: '9:55', end: '11:15' },
+    { start: '11:50', end: '13:10' },
+    { start: '13:30', end: '14:50' },
+    { start: '15:00', end: '16:20' },
+    { start: '16:30', end: '17:50' },
+    { start: '18:00', end: '19:20' }
+  ]
+}
