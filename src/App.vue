@@ -1,69 +1,23 @@
 <template>
-  <div id="app" :class="theme + classFocusSearch">
-    <el-container>
-      <el-header class="primary">
-        <navbar />
-      </el-header>
-      <el-main>
-        <router-view />
-      </el-main>
-    </el-container>
+  <div id="app">
+    <img src="./assets/logo.png">
+    <router-view/>
   </div>
 </template>
 
 <script>
-import Navbar from './components/header/Navbar'
-
 export default {
-  components: {
-    Navbar
-  },
-  created () {
-    this.$store.commit('GET_DARK_THEME')
-  },
-  computed: {
-    classFocusSearch () {
-      return this.$store.state.template.isFocusSearch ? ' is--search' : ''
-    },
-    theme () {
-      return this.$store.state.template.theme
-    }
-  }
+  name: 'App'
 }
 </script>
 
-<style lang="scss" scoped>
+<style>
 #app {
-  min-height: 100vh;
-  background: #fbfbfb;
-  &.is--search {
-    height: 100vh;
-    overflow: hidden;
-    .el-main {
-      filter: blur(5px)
-    }
-  }
-}
-
-header {
-  display: flex;
-  align-items: center;
-  height: 64px !important;
-  box-shadow: 0 0 1px 0 #4c4c4c;
-  z-index: 999;
-}
-
-.el-main {
-  padding: 0;
-}
-
-// Dark Theme
-.dark {
-  &#app {
-    background: #222;
-  }
-  header {
-    background: #333;
-  }
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-align: center;
+  color: #2c3e50;
+  margin-top: 60px;
 }
 </style>
