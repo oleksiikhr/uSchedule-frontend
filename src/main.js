@@ -1,15 +1,23 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-import Vue from 'vue'
-import App from './App'
+import ElementUiLangRu from 'element-ui/lib/locale/lang/ru-RU'
+import ElementUi from 'element-ui'
 import router from './router'
+import moment from 'moment'
+import store from 'store'
+import App from './App'
+import Vue from 'vue'
 
+// Connect files, change the language.
+Vue.use(ElementUi, ElementUiLangRu)
+moment.locale('ru')
+
+// Prevent the production tip on Vue startup.
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   components: { App },
   template: '<App/>'
 })
