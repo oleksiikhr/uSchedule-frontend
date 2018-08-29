@@ -1,6 +1,6 @@
-# uschedule
+# uSchedule
 
-> -
+> Create a schedule for the schools
 
 ## Build Setup
 
