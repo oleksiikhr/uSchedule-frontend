@@ -1,9 +1,7 @@
 {
   "name": "uschedule",
-  "version": "1.0.0",
-  "description": "-",
-  "author": "Alexey Khrusch <alexeykhr@outlook.com>",
-  "private": true,
+  "version": "0.1.0",
+  "description": "Create a schedule for the schools",
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
