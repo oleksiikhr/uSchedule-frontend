@@ -1,8 +1,8 @@
 import ElementUiLangRu from 'element-ui/lib/locale/lang/ru-RU'
 import ElementUi from 'element-ui'
 import router from './router'
+import store from './store'
 import moment from 'moment'
-import store from 'store'
 import App from './App'
 import Vue from 'vue'
 
