@@ -10,6 +10,9 @@ const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
 const OptimizeCSSPlugin = require('optimize-css-assets-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
+const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
+const WebpackPwaManifest = require('webpack-pwa-manifest')
+const packageJson = require('../package')
 
 const env = require('../config/prod.env')
 
@@ -70,7 +73,27 @@ const webpackConfig = merge(baseWebpackConfig, {
         to: config.build.assetsSubDirectory,
         ignore: ['.*']
       }
-    ])
+    ]),
+    new SWPrecacheWebpackPlugin({
+      cacheId: packageJson.name,
+      dontCacheBustUrlsMatching: /\.\w{8}\./,
+      filename: 'sw.js',
+      minify: true,
+      navigateFallback: packageJson.url,
+      staticFileGlobsIgnorePatterns: [/\.map$/, /asset-manifest\.json$/],
+    }),
+    new WebpackPwaManifest({
+      name: 'uSchedule',
+      short_name: 'uSchedule',
+      description: packageJson.description,
+      background_color: '#fff',
+      theme_color: '#fff',
+      start_url: packageJson.url,
+      icons: [{
+        src: path.resolve('static/img/clock.png'),
+        sizes: [96, 128, 192, 256, 384, 512]
+      }]
+    })
   ],
   optimization: {
     splitChunks: {
