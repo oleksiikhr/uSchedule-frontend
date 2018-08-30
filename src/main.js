@@ -6,6 +6,9 @@ import moment from 'moment'
 import App from './App'
 import Vue from 'vue'
 
+// Styles
+import './assets/styles/index.scss'
+
 // Connect files, change the language.
 Vue.use(ElementUi, ElementUiLangRu)
 moment.locale('ru')
