@@ -1,7 +1,7 @@
 /**
  * Call time, with settings for the "schedule" page.
  *
- * @type {{show: {current: boolean, rest: boolean, time: boolean}, time: *[]}}
+ * @type {{utc: number, show: {current: boolean, rest: boolean, time: boolean}, time: *[]}}
  */
 export const schedule = {
   utc: 3,
