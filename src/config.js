@@ -1,6 +1,10 @@
-export const devUrlApi = 'http://uschedule.local/api'
-
+/**
+ * Call time, with settings for the "schedule" page.
+ *
+ * @type {{show: {current: boolean, rest: boolean, time: boolean}, time: *[]}}
+ */
 export const schedule = {
+  utc: 3,
   show: {
     current: true,
     rest: true,
@@ -14,44 +18,5 @@ export const schedule = {
     { start: '15:00', end: '16:20' },
     { start: '16:30', end: '17:50' },
     { start: '18:00', end: '19:20' }
-  ]
-}
-
-export const sections = {
-  items: [
-    {
-      name: 'Аккаунт',
-      is_auth: true,
-      items: [
-        { name: 'Профиль', link: '/profile' },
-        { name: 'Настройки', link: '/settings' },
-        { name: 'Уведомления', link: '/notifications' }
-      ]
-    },
-    {
-      name: 'Сайт',
-      items: [
-        { name: 'Главная страница', link: '/' },
-        { name: 'Авторизация', link: '/login', is_auth: false },
-        { name: 'Расписание звонков', link: '/schedule' }
-      ]
-    },
-    {
-      name: 'Админка',
-      is_admin: true,
-      items: [
-        { name: 'Главная страница', link: '/admin' },
-        { name: 'Настройки', link: '/admin/settings' },
-        { name: 'Преподаватели', link: '/admin/teachers' },
-        { name: 'Предметы', link: '/admin/subjects' }
-      ]
-    },
-    {
-      name: 'Внешние ресурсы',
-      items: [
-        { name: 'Официальный сайт', href: 'https://example.com/' },
-        { name: 'Google карта', href: 'https://example.com/' }
-      ]
-    }
   ]
 }

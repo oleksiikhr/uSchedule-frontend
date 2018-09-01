@@ -1,30 +1,20 @@
-// Components
-import Vue from 'vue'
-import App from './App'
-import axios from 'axios'
-import moment from 'moment'
+import ElementUiLangRu from 'element-ui/lib/locale/lang/ru-RU'
+import ElementUi from 'element-ui'
 import router from './router'
-import store from './store/index'
-import ElementUI from 'element-ui'
-import { devUrlApi } from './config'
-import lang from 'element-ui/lib/locale/lang/ru-RU'
+import store from './store'
+import moment from 'moment'
+import App from './App'
+import Vue from 'vue'
 
-// Styles (own + libs)
-import './assets/scss/main.scss'
+// Styles
+import './assets/styles/index.scss'
 
-if (process.env.NODE_ENV !== 'production') {
-  axios.defaults.baseURL = devUrlApi
-}
-
-Vue.use(ElementUI, lang)
+// Connect files, change the language.
+Vue.use(ElementUi, ElementUiLangRu)
 moment.locale('ru')
 
+// Prevent the production tip on Vue startup.
 Vue.config.productionTip = false
-
-// Router
-router.beforeEach((to, from, next) => {
-  next()
-})
 
 /* eslint-disable no-new */
 new Vue({
