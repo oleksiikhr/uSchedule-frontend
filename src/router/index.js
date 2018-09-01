@@ -13,6 +13,11 @@ export default new Router({
       path: '/',
       name: 'home',
       component: load('Home')
+    },
+    {
+      path: '/timetable',
+      name: 'timetable',
+      component: load('Timetable')
     }
   ]
 })
