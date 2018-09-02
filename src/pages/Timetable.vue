@@ -1,5 +1,4 @@
 <template>
-  <!--TODO mobile design-->
   <div id="timetable">
     <div class="timetable__header">
       <h1>Расписание звонков</h1>
@@ -156,6 +155,15 @@ td {
 .current {
   &.work .f, &.rest .s  {
     background: rgba(0, 0, 0, .05);
+  }
+}
+
+@media only screen and (max-width: 425px) {
+  #timetable {
+    padding: 30px 0 0;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
   }
 }
 </style>
