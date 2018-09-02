@@ -140,7 +140,7 @@ td {
 
 #timetable {
   max-width: 450px;
-  margin: 30px auto;
+  margin: 0 auto;
   border: 1px solid #e7e7e7;
   background: #fff;
   padding: 40px;
@@ -167,10 +167,10 @@ td {
 
 .current {
   &.work .f  {
-    color: $red;
+    color: $color-red;
   }
   &.rest .s {
-    color: $red;
+    color: $color-red;
   }
 }
 </style>
