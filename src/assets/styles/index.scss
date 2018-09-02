@@ -4,3 +4,10 @@
 
 // Local styles
 @import "global";
+@import "helper";
+
+#app {
+  position: relative;
+  max-width: 1024px;
+  margin: 0 auto;
+}

@@ -17,9 +17,11 @@ a {
   }
 }
 
-#app {
-  max-width: 1024px;
-  margin: 0 auto;
+input {
+  outline: 0;
+  border-radius: 20px;
+  padding: 8px 15px;
+  border: 1px solid #e7e7e7;
 }
 
 // Scrollbar

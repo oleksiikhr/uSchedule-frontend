@@ -1,0 +1,10 @@
+@import "variables";
+
+.blur-5 {
+  filter: blur(5px);
+}
+
+.box-shadow {
+  box-shadow: $box-shadow;
+  transition: $transition;
+}
