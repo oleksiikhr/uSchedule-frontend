@@ -1,19 +1,18 @@
 <template>
   <header id="header">
-    <div class="header__clock">
+    <div class="header__clock" @click="closeSearch">
       <router-link :to="{ name: 'timetable' }">
         <i class="material-icons">access_time</i>
       </router-link>
     </div>
-    <div class="header__logo">
+    <div class="header__logo" @click="closeSearch">
       <router-link :to="{ name: 'home' }">
         <strong style="font-size: 1.2rem; border-bottom: 1px solid;">uSchedule</strong>
       </router-link>
     </div>
     <div class="header__find">
-      <!--TODO Search, full-height (schedule, teacher)-->
-      <a @click="openSearch">
-        <i class="material-icons">search</i>
+      <a @click="toggleSearch">
+        <i class="material-icons">{{ search ? 'close' : 'search' }}</i>
       </a>
     </div>
   </header>
@@ -22,18 +21,25 @@
 <script>
 export default {
   methods: {
-    openSearch () {
-      console.log('Open search')
+    toggleSearch () {
+      if (this.search) {
+        return this.closeSearch()
+      }
+
+      return this.openSearch()
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/styles/_variables.scss";
+
 a {
   display: block;
   line-height: 0;
   padding: 0 20px;
+  user-select: none;
 }
 
 #header {
@@ -41,5 +47,6 @@ a {
   align-items: center;
   justify-content: space-between;
   padding: 10px;
+  margin-bottom: 20px;
 }
 </style>
