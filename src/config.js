@@ -1,27 +1,9 @@
-/**
- * Add a new diff attribute to existing objects.
- *
- * @param  {Array}  times
- * @return {Array}
- */
-function addDiffTime (times) {
-  const len = times.length
-
-  for (let i = 0; i < len - 1; i++) {
-    const [fHour, fMinute] = times[i].end.split(':').map(Number)
-    const [sHour, sMinute] = times[i + 1].start.split(':').map(Number)
-    const diff = (sHour * 60 + sMinute) - (fHour * 60 + fMinute)
-
-    times[i].diff = Math.floor(diff / 60) + ':' + diff % 60
-  }
-
-  return times
-}
+import { addDiffTime } from './scripts/timestamp'
 
 /**
  * Call time, with settings for the "schedule" page.
  *
- * @type {{utc: number, show: {current: boolean, rest: boolean, time: boolean}, time: *[]}}
+ * @type {{utc: number, show: {current: boolean, rest: boolean, time: boolean}, time: {start: string, end: string, diff: string}[]}}
  */
 export const schedule = {
   utc: 3,
