@@ -19,7 +19,7 @@
         <td>{{ index + 1 }}</td>
         <td class="f">{{ item.start }}</td>
         <td class="f">{{ item.end }}</td>
-        <td class="s" v-if="schedule.show.rest">{{ compareTime(index) }}</td>
+        <td class="s" v-if="schedule.show.rest">{{ item.diff }}</td>
       </tr>
       </tbody>
     </table>
@@ -51,24 +51,12 @@ export default {
     }
   },
   methods: {
-    compareTime (index) {
-      if (!this.schedule.time[index + 1]) {
-        return ''
-      }
-
-      const [fHour, fMinute] = this.schedule.time[index].end.split(':').map(Number)
-      const [sHour, sMinute] = this.schedule.time[index + 1].start.split(':').map(Number)
-      const diff = (sHour * 60 + sMinute) - (fHour * 60 + fMinute)
-
-      return Math.floor(diff / 60) + ':' + diff % 60
-    },
     getClassRow (index) {
       if (!this.schedule.show.current) {
         return
       }
 
-      const date = new Date()
-      const time = date.getHours() * 60 + date.getMinutes()
+      const time = this.date.getHours() * 60 + this.date.getMinutes()
 
       const [startTimeHour, startTimeMinute] = this.schedule.time[index].start.split(':').map(Number)
       const [endTimeHour, endTimeMinute] = this.schedule.time[index].end.split(':').map(Number)
@@ -166,11 +154,8 @@ td {
 }
 
 .current {
-  &.work .f  {
-    color: $color-red;
-  }
-  &.rest .s {
-    color: $color-red;
+  &.work .f, &.rest .s  {
+    background: rgba(0, 0, 0, .05);
   }
 }
 </style>
