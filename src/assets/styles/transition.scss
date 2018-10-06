@@ -1,0 +1,17 @@
+// Pages
+.page-enter-active {
+  transform: translateX(-20px);
+  transition: .3s;
+}
+
+.page-enter-to {
+  transform: translateX(0);
+}
+
+.page-leave-active {
+  transition: .3s;
+  opacity: 0;
+  transform: translateX(20px);
+}
+
+// Search

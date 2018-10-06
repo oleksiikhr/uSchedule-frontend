@@ -2,7 +2,9 @@
   <div id="app">
     <u-header />
     <div id="content" :class="{ 'blur-5': search }">
-      <router-view />
+      <transition name="page" mode="out-in">
+        <router-view />
+      </transition>
     </div>
 
     <u-search v-show="search" @close="closeSearch" />
@@ -18,11 +20,17 @@ export default {
     uHeader, uSearch
   },
   mounted () {
-    document.addEventListener('keyup', (e) => {
+    document.addEventListener('keyup', this.eventKeyUp)
+  },
+  destroyed () {
+    document.removeEventListener('keyup', this.eventKeyUp)
+  },
+  methods: {
+    eventKeyUp (e) {
       if (e.keyCode === 27) {
         this.closeSearch()
       }
-    })
+    }
   }
 }
 </script>

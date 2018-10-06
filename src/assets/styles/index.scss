@@ -1,13 +1,22 @@
 // Libraries
-@import 'material-design-icons/iconfont/material-icons.css';
-@import 'normalize.css';
+@import "material-design-icons/iconfont/material-icons.css";
+@import "normalize.css";
 
 // Local styles
 @import "global";
 @import "helper";
+@import "transition";
 
 #app {
+  display: flex;
+  flex-direction: column;
   position: relative;
   max-width: 1024px;
   margin: 0 auto;
+  min-height: 100vh;
+}
+
+#content {
+  flex: 1;
+  padding: 20px;
 }

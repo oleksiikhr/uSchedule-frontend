@@ -38,7 +38,7 @@ export default {
 a {
   display: block;
   line-height: 0;
-  padding: 0 20px;
+  padding: 0 5px;
   user-select: none;
 }
 
@@ -46,7 +46,6 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
-  margin-bottom: 20px;
+  padding: 10px 20px;
 }
 </style>

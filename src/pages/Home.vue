@@ -4,6 +4,12 @@
 
 <script>
 export default {
-
+  data () {
+    return {
+      schedule: [
+        { name: '' }
+      ]
+    }
+  }
 }
 </script>
