@@ -1,17 +1,38 @@
 // Pages
-.page-enter-active {
+.page-enter {
   transform: translateX(-20px);
-  transition: .3s;
+  opacity: 0;
 }
-
 .page-enter-to {
+  transition: .2s;
+  transform: translateX(0);
+  opacity: 1;
+}
+.page-leave {
   transform: translateX(0);
 }
-
-.page-leave-active {
-  transition: .3s;
-  opacity: 0;
+.page-leave-to {
+  transition: .2s;
   transform: translateX(20px);
+  opacity: 0;
 }
 
 // Search
+.search-enter {
+  transform: translateY(-66px);
+  opacity: 0;
+}
+.search-enter-to {
+  transform: translateY(0);
+  opacity: 1;
+  transition: .2s;
+}
+.search-leave {
+  transform: translateY(0);
+  opacity: 1;
+}
+.search-leave-to {
+  transform: translateY(-66px);
+  transition: .2s;
+  opacity: 0;
+}

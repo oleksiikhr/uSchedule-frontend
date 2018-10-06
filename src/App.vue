@@ -3,11 +3,13 @@
     <u-header />
     <div id="content" :class="{ 'blur-5': search }">
       <transition name="page" mode="out-in">
-        <router-view />
+        <router-view class="content__inner" />
       </transition>
     </div>
 
-    <u-search v-show="search" @close="closeSearch" />
+    <transition name="search">
+      <u-search v-show="search" @close="closeSearch" />
+    </transition>
   </div>
 </template>
 
@@ -18,19 +20,6 @@ import uHeader from './components/Header'
 export default {
   components: {
     uHeader, uSearch
-  },
-  mounted () {
-    document.addEventListener('keyup', this.eventKeyUp)
-  },
-  destroyed () {
-    document.removeEventListener('keyup', this.eventKeyUp)
-  },
-  methods: {
-    eventKeyUp (e) {
-      if (e.keyCode === 27) {
-        this.closeSearch()
-      }
-    }
   }
 }
 </script>

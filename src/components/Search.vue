@@ -49,6 +49,7 @@ export default {
   width: 100%;
   height: calc(100% - #{$header-height});
   min-height: calc(100vh - #{$header-height} + 1px);
+  will-change: transform;
 }
 
 .search__header {
