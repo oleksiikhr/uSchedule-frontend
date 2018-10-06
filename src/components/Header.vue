@@ -11,9 +11,9 @@
       </router-link>
     </div>
     <div class="header__find">
-      <a @click="toggleSearch">
+      <button @click="toggleSearch">
         <i class="material-icons">{{ search ? 'close' : 'search' }}</i>
-      </a>
+      </button>
     </div>
   </header>
 </template>

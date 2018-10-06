@@ -126,7 +126,7 @@ td {
 }
 
 #timetable {
-  max-width: 450px;
+  max-width: 500px;
   margin: 0 auto;
   border: 1px solid #e7e7e7;
   background: #fff;

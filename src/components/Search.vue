@@ -54,10 +54,10 @@ export default {
 
 .search__header {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 0 20px 20px;
   > input {
     width: 100%;
-    min-width: 300px;
+    min-width: 250px;
     max-width: 500px;
     font-size: .9rem;
   }
