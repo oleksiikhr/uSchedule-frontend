@@ -1,24 +1,24 @@
 <template>
   <div id="timetable">
     <div class="timetable__header">
-      <h1>Расписание звонков</h1>
+      <h1>Timetable</h1>
       <span class="timetable__header__now">{{ time }}</span>
     </div>
     <table class="timetable__content">
       <thead>
       <tr>
-        <td><i class="material-icons">format_list_numbered</i></td>
-        <td><i class="material-icons">alarm</i></td>
-        <td><i class="material-icons">alarm_off</i></td>
-        <td v-if="schedule.show.rest"><i class="material-icons">restaurant</i></td>
+        <th><i class="material-icons">format_list_numbered</i></th>
+        <th><i class="material-icons">alarm</i></th>
+        <th><i class="material-icons">alarm_off</i></th>
+        <th><i class="material-icons">restaurant</i></th>
       </tr>
       </thead>
       <tbody>
-      <tr v-for="(item, index) in schedule.time" :key="index" :class="getClassRow(index)">
+      <tr v-for="(item, index) in timetable" :key="index" :class="getClassRow(index)">
         <td>{{ index + 1 }}</td>
-        <td class="f">{{ item.start }}</td>
-        <td class="f">{{ item.end }}</td>
-        <td class="s" v-if="schedule.show.rest">{{ item.diff }}</td>
+        <td class="td-time">{{ item.start }}</td>
+        <td class="td-time">{{ item.end }}</td>
+        <td class="td-rest">{{ item.diff }}</td>
       </tr>
       </tbody>
     </table>
@@ -26,23 +26,26 @@
 </template>
 
 <script>
+import { getTimetable, getConfigUtc } from '../database'
 import { getUtcOffset } from '../scripts/timestamp'
 import { pad2 } from '../scripts/methods'
-import { schedule } from '../config'
 
 export default {
   data () {
     return {
-      schedule,
-      date: getUtcOffset(schedule.utc)
+      timetable: [],
+      utc: 0,
+      date: new Date()
     }
   },
-  created () {
-    if (schedule.show.time) {
-      setInterval(() => {
-        this.date = getUtcOffset(schedule.utc)
-      }, 1000)
-    }
+  async beforeCreate () {
+    this.timetable = await getTimetable()
+    this.utc = await getConfigUtc()
+    this.date = getUtcOffset(this.utc)
+
+    this._timer = setInterval(() => {
+      this.date = getUtcOffset(this.utc)
+    }, 1000)
   },
   computed: {
     time () {
@@ -51,14 +54,10 @@ export default {
   },
   methods: {
     getClassRow (index) {
-      if (!this.schedule.show.current) {
-        return
-      }
-
       const time = this.date.getHours() * 60 + this.date.getMinutes()
 
-      const [startTimeHour, startTimeMinute] = this.schedule.time[index].start.split(':').map(Number)
-      const [endTimeHour, endTimeMinute] = this.schedule.time[index].end.split(':').map(Number)
+      const [startTimeHour, startTimeMinute] = this.timetable[index].start.split(':').map(Number)
+      const [endTimeHour, endTimeMinute] = this.timetable[index].end.split(':').map(Number)
 
       const startTime = startTimeHour * 60 + startTimeMinute
       const endTime = endTimeHour * 60 + endTimeMinute
@@ -67,8 +66,8 @@ export default {
         return 'current work'
       }
 
-      if (this.schedule.time[index + 1]) {
-        const [nextStartTimeHour, nextStartTimeMinute] = this.schedule.time[index + 1].start.split(':').map(Number)
+      if (this.timetable[index + 1]) {
+        const [nextStartTimeHour, nextStartTimeMinute] = this.timetable[index + 1].start.split(':').map(Number)
         const nextStartTime = nextStartTimeHour * 60 + nextStartTimeMinute
 
         if (time >= endTime && time < nextStartTime) {
@@ -78,7 +77,7 @@ export default {
     }
   },
   beforeDestroy () {
-    clearInterval(this.timer)
+    clearInterval(this._timer)
   }
 }
 </script>
@@ -98,7 +97,7 @@ thead {
   border: 1px solid #c1c1c1;
   border-left: 0;
   border-right: 0;
-  td {
+  th {
     line-height: 0;
   }
 }
@@ -121,7 +120,7 @@ tr {
   }
 }
 
-td {
+td, th {
   padding: 20px;
 }
 
@@ -130,7 +129,7 @@ td {
   margin: 0 auto;
   border: 1px solid #e7e7e7;
   background: #fff;
-  padding: 40px;
+  padding: 30px 40px;
   cursor: context-menu;
   border-radius: 10px;
 }
@@ -153,7 +152,7 @@ td {
 }
 
 .current {
-  &.work .f, &.rest .s  {
+  &.work .td-time, &.rest .td-rest  {
     background: rgba(0, 0, 0, .05);
   }
 }

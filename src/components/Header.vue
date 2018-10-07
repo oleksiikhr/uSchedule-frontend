@@ -35,7 +35,7 @@ export default {
 <style lang="scss" scoped>
 @import "../assets/styles/_variables.scss";
 
-a {
+a, button {
   display: block;
   line-height: 0;
   padding: 0 5px;

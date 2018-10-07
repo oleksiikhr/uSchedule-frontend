@@ -22,7 +22,7 @@ export default {
   },
   methods: {
     fetchGetTeachers () {
-      console.log('fetchGetTeachers')
+      //
     }
   },
   watch: {
